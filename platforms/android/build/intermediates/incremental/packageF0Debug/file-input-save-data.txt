@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jul 05 11:37:03 IST 2017
+#Wed Jul 05 14:42:49 IST 2017
 2185.file=D\:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\assets\\F0\\debug\\app\\tns_modules\\nativescript-theme-core\\scss\\skins\\dark\\_index.scss
 1425.base=D\:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\resources-F0-debug.ap_
 2716.set=ASSET
