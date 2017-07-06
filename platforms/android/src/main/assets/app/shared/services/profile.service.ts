@@ -6,7 +6,7 @@ export class ProfileService {
 constructor(private http: Http) {}
 getProfile(token: string )
 {
-    alert("token rec by service is "+token);
+  //  alert("token rec by service is "+token);
 let headers = new Headers();
     headers.append("Content-Type", "application/json");
 return this.http.get(this.profileUrl+token+"&format=json").map(result=>result.json());

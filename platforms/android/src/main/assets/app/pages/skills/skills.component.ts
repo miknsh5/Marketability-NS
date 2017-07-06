@@ -11,7 +11,7 @@ export class SkillsComponent implements OnInit{
  @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
   ngOnInit()
  {
-  alert("Skills");
+ // alert("Skills");
  }
    
     constructor() {

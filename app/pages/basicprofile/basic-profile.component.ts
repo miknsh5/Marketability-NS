@@ -9,7 +9,7 @@ import {Page} from "ui/page";
 export class BasicProfileComponent implements OnInit{
   ngOnInit()
  {
-  alert("basic profile");
+  //alert("basic profile");
  }
     @Input() profile;
     constructor() {

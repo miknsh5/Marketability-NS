@@ -118,7 +118,7 @@ export class ProfileManagerComponent implements OnInit {
 
     extractProfileData(profile:any)
     {
-        alert(profile.id);
+       // alert(profile.id);
         let userProfile = new PersonProfile();
          userProfile.Profile = new Profile();
             userProfile.Skills = new Array<Skill>();
@@ -151,7 +151,7 @@ export class ProfileManagerComponent implements OnInit {
                 userProfile.Experience.WorkExperience.push(companyInfo);
             });
             this.currentProfile= userProfile;
-            alert(this.currentProfile.Profile.Name);
+           // alert(this.currentProfile.Profile.Name);
     }
     handleError(error:any)
     {
