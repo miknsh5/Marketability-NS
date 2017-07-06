@@ -8,23 +8,13 @@ import { Skill, ProfilePage } from '../../../app/shared';
     templateUrl: 'pages/skills/skills.html',
     styleUrls: ['pages/skills/skills-common.css']
 })
-<<<<<<< HEAD
+
 export class SkillsComponent implements OnInit, AfterViewInit {
     @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
     @Output() currentPage = new EventEmitter<ProfilePage>();
     ngOnInit() {
         //   alert(this.CurrentProfileSkills);
     }
-
-=======
-export class SkillsComponent implements OnInit{
- @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
-  ngOnInit()
- {
- // alert("Skills");
- }
-   
->>>>>>> task/linkedInIntegration
     constructor() {
 
     }

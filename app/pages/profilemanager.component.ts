@@ -158,9 +158,9 @@ export class ProfileManagerComponent implements OnInit {
                     companyInfo.EndDate = '';
                 }
                 userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
+               // userProfile.Experience.WorkExperience.push(companyInfo);
+              //  userProfile.Experience.WorkExperience.push(companyInfo);
+               // userProfile.Experience.WorkExperience.push(companyInfo);
             });
             this.currentProfile= userProfile;
            // alert(this.currentProfile.Profile.Name);
@@ -237,7 +237,7 @@ this.profileService.getProfile(this.token).subscribe(
  */
 
         // dummy experience data
-        let dummyWorkExps = Array<CompanyInfo>();
+      /*  let dummyWorkExps = Array<CompanyInfo>();
 
         ["HDFC", "L&T", "OmniTech", "Cennest"].forEach(elm => {
             let companyInfo1 = new CompanyInfo();
@@ -248,7 +248,7 @@ this.profileService.getProfile(this.token).subscribe(
             dummyWorkExps.push(companyInfo1);
         });
 
-        this.currentProfile.Experience.WorkExperience = dummyWorkExps;
+        this.currentProfile.Experience.WorkExperience = dummyWorkExps;*/
     }
 
 }

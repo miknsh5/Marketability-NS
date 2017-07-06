@@ -4,8 +4,11 @@ D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\mai
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\main.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\profilemanager.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\basicprofile\basic-profile.component.js
+D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\calculation\calculation.component.js
+D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\experience\experience.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\list\list.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\login\login.component.js
+D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\score\score.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\skills\skills.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\config.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\index.js
