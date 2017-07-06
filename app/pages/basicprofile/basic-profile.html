@@ -1,4 +1,6 @@
 <StackLayout>
     <label text="Name"></label>
-    <TextField [text]="profile.Name"></TextField>
+    <TextField *ngIf="profile" [text]="profile.Name"></TextField>
+    <label text="Title"></label>
+    <TextField *ngIf="profile" [text]="profile.Occupation"></TextField>
 </StackLayout>

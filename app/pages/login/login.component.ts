@@ -2,6 +2,17 @@ import { Component ,OnInit } from "@angular/core";
 
 import { Router , NavigationExtras } from "@angular/router";
 import {Page} from "ui/page";
+import {
+    getBoolean,
+    setBoolean,
+    getNumber,
+    setNumber,
+    getString,
+    setString,
+    hasKey,
+    remove,
+    clear
+} from "application-settings";
 //import { AuthService } from "../../../app/shared";
 import * as tnsOAuthModule from 'nativescript-oauth';
 
@@ -17,23 +28,26 @@ export class LoginComponent implements OnInit {
 
 
 token:string;
-
+tokenRecieved:boolean=false;
    
    Profile()
-   { 
+   {  
        tnsOAuthModule.login()
     .then(()=>{
         console.log('logged in');
         console.dir("accessToken " + tnsOAuthModule.accessToken());
         this.token=tnsOAuthModule.accessToken();
+        setString("accesstoken",this.token);
+         this.router.navigate(["manager"]);
+         this.tokenRecieved= true;
         //console.log(this.token);
         //alert(tnsOAuthModule.accessToken());
-        let navigationExtras: NavigationExtras = {
+        /*let navigationExtras: NavigationExtras = {
             queryParams: {
                 "accesstoken": this.token
                 
             }
-        };
+        };*/
 
      // this.router.navigate(["manager"],navigationExtras);
     })
@@ -41,8 +55,13 @@ token:string;
           alert(er);
         //do something with the error 
     });
+       if (this.tokenRecieved===false) {
+           if (hasKey("accesstoken")) {
+               this.router.navigate(["manager"]);
+           }
+       }
 
-  this.router.navigate(["manager"]);
+ 
    }
     ngOnInit() {
         alert("Login Page");

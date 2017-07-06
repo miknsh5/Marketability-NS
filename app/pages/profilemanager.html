@@ -3,11 +3,13 @@
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" 
     (tap)="onPrevButtonClicked(currentPage)"></NavigationButton>
 </ActionBar>
-<DockLayout stretchLastChild="true">
+<DockLayout stretchLastChild="true" *ngIf="currentProfile">
    
     <button dock="bottom" width="100" Height="100" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)"></button>
+    
     <mkb-basic-profile [profile]="currentProfile.Profile" *ngIf="currentPage === 0" dock="top"></mkb-basic-profile>
-    <mkb-skills *ngIf="currentPage === 1" dock="top"></mkb-skills>
+   
+    <mkb-skills [CurrentProfileSkills]="currentProfile.Skills"  *ngIf="currentPage === 1" dock="top"></mkb-skills>
 
 </DockLayout>
 

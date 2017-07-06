@@ -2,10 +2,21 @@ import { Component ,OnInit } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 import { Router , ActivatedRoute} from "@angular/router";
 import {Page} from "ui/page";
-
+import {
+    getBoolean,
+    setBoolean,
+    getNumber,
+    setNumber,
+    getString,
+    setString,
+    hasKey,
+    remove,
+    clear
+} from "application-settings";
 
 import "rxjs/Rx";
 import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
+
 import {
      PersonProfile, Skill, Profile,
     Experience, CompanyInfo, ProfilePage, MarketabilityService, ProfileService
@@ -29,20 +40,21 @@ export class ProfileManagerComponent implements OnInit {
     currentProgress: number;
     token:any;
 
-    constructor(private route: ActivatedRoute, private marketabilityService: MarketabilityService,private profileService: ProfileService) {
-       this.route.queryParams.subscribe(params => {
-            this.token = params["accesstoken"];
-            console.log(this.token);
-         //alert("token recieved by profile manage"+this.token);
-        });
+    constructor( private marketabilityService: MarketabilityService,private profileService: ProfileService) {
+      
+       this.token= getString("accesstoken");
+       if(this.token ===null)
+       {
+           //reroute to login page
+       }
         this.currentPage = ProfilePage.Profile;
        // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
         this.currentProgress = 25;
-        
+         
     }
 
     ngOnInit() {
-        this.getProfile();
+       this.getProfile();
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
     }
@@ -106,14 +118,14 @@ export class ProfileManagerComponent implements OnInit {
 
     extractProfileData(profile:any)
     {
-        alert(profile.name);
-        const userProfile = new PersonProfile();
+        alert(profile.id);
+        let userProfile = new PersonProfile();
          userProfile.Profile = new Profile();
             userProfile.Skills = new Array<Skill>();
             userProfile.Experience = new Experience();
             userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
 
-            userProfile.Profile.Name = profile.name;
+            userProfile.Profile.Name = profile.firstName+" "+profile.lastName;
             userProfile.Profile.City = profile.location.name;
             userProfile.Profile.Occupation = profile.headline;
             ['C#', 'Java', 'JavaScript', 'Python','Ruby On Rails'].forEach(elm => {
@@ -139,10 +151,11 @@ export class ProfileManagerComponent implements OnInit {
                 userProfile.Experience.WorkExperience.push(companyInfo);
             });
             this.currentProfile= userProfile;
+            alert(this.currentProfile.Profile.Name);
     }
     handleError(error:any)
     {
-alert(error);
+    alert(error+"extractProfileData");
     }
 
     public getProfile() {
