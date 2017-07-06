@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+// import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { AUTH_CONFIG } from './auth.config';
 import { Profile, Skill, Experience, PersonProfile, CompanyInfo } from '../../index';
@@ -49,7 +49,7 @@ export class AuthService {
     }
 
     isAuthenticated() {
-        return tokenNotExpired('id_token');
+        // return tokenNotExpired('id_token');
     }
 
     private clearStorage() {

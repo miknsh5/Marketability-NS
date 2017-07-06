@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(["manager"]);
    }
     ngOnInit() {
-        alert("Login Page");
+        // alert("Login Page");
        
        /* if (this.auth.isAuthenticated()) {
             this.router.navigate(['home']);
