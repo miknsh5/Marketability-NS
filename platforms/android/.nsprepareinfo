@@ -1,7 +1,11 @@
 {
+<<<<<<< HEAD
 	"time": "Thu Jul 06 2017 16:10:46 GMT+0530 (India Standard Time)",
+=======
+	"time": "Thu Jul 06 2017 15:41:30 GMT+0530 (India Standard Time)",
+>>>>>>> task/linkedInIntegration
 	"bundle": false,
 	"release": false,
 	"changesRequireBuild": false,
-	"changesRequireBuildTime": "Wed Jul 05 2017 11:35:22 GMT+0530 (India Standard Time)"
+	"changesRequireBuildTime": "Wed Jul 05 2017 14:42:21 GMT+0530 (India Standard Time)"
 }

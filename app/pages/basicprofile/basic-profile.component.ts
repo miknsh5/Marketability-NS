@@ -10,7 +10,6 @@ import {ProfilePage} from '../../shared/index';
 export class BasicProfileComponent implements OnInit, AfterViewInit {
   ngOnInit()
  {
-//   alert("basic profile");
  }
     @Input() profile;
     @Output() currentPage = new EventEmitter<ProfilePage>();

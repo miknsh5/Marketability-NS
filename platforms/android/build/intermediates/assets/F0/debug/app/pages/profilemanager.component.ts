@@ -2,10 +2,12 @@ import { Component ,OnInit } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 import { Router } from "@angular/router";
 import {Page} from "ui/page";
+
 import {
      PersonProfile, Skill, Profile,
     Experience, CompanyInfo, ProfilePage, MarketabilityService
 } from '../shared/index';
+declare var Auth0Lock: any;
 @Component({
     selector: 'mkb-profilemanager',
     templateUrl: 'pages/profilemanager.html',

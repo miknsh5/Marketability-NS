@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 <StackLayout>
     <label *ngFor="let skill of CurrentProfileSkills" text={{skill.SkillName}}></label>
     <!--<ListView items="{{ CurrentProfileSkills }}"></ListView>-->
 </StackLayout>
+=======
+
+    <GridLayout>
+        <ListView [items]="CurrentProfileSkills">
+            <ng-template let-item="item">
+                <Label [text]="item.SkillName"></Label>
+            </ng-template>
+        </ListView>
+    </GridLayout>
+>>>>>>> task/linkedInIntegration
