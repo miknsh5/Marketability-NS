@@ -130,7 +130,7 @@ export class ProfileManagerComponent implements OnInit {
 
     extractProfileData(profile:any)
     {
-       // alert(profile.id);
+        alert(profile.firstName);
         let userProfile = new PersonProfile();
          userProfile.Profile = new Profile();
             userProfile.Skills = new Array<Skill>();
@@ -158,9 +158,9 @@ export class ProfileManagerComponent implements OnInit {
                     companyInfo.EndDate = '';
                 }
                 userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
+               // userProfile.Experience.WorkExperience.push(companyInfo);
+              //  userProfile.Experience.WorkExperience.push(companyInfo);
+               // userProfile.Experience.WorkExperience.push(companyInfo);
             });
             this.currentProfile= userProfile;
            // alert(this.currentProfile.Profile.Name);
@@ -171,7 +171,7 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     public getProfile() {
-        
+        alert("get profile called");
 this.profileService.getProfile(this.token).subscribe(
     data => this.extractProfileData(data),
             error => this.handleError(error),
