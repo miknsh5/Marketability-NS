@@ -28,49 +28,52 @@ export class LoginComponent implements OnInit {
 
 
 token:string;
-tokenRecieved:boolean=false;
+
    
-   Profile()
-   {  
-       tnsOAuthModule.login()
-    .then(()=>{
-        console.log('logged in');
-        console.dir("accessToken " + tnsOAuthModule.accessToken());
-        this.token=tnsOAuthModule.accessToken();
-        setString("accesstoken",this.token);
-         this.router.navigate(["manager"]);
-         this.tokenRecieved= true;
-        //console.log(this.token);
-        //alert(tnsOAuthModule.accessToken());
-        /*let navigationExtras: NavigationExtras = {
-            queryParams: {
-                "accesstoken": this.token
-                
-            }
-        };*/
+   saveToken()
+   {
 
-     // this.router.navigate(["manager"],navigationExtras);
-    })
-    .catch((er)=>{
-          alert(er);
-        //do something with the error 
-    });
-       if (this.tokenRecieved===false) {
-           if (hasKey("accesstoken")) {
-               this.router.navigate(["manager"]);
-           }
-       }
-
- 
    }
+
+    tryLogin() {
+        if (hasKey("accesstoken")) {
+            tnsOAuthModule.ensureValidToken()
+                .then((token: string) => {
+                    console.log('token: ' + token);
+                    this.token = tnsOAuthModule.accessToken();
+
+                    setString("accesstoken", this.token);
+                    this.router.navigate(["manager"]);
+
+                })
+                .catch((er) => {
+                    //do something with the error 
+                    alert("error while validation. Logging in again" + er)
+                    tnsOAuthModule.logout();
+                    this.login();
+                });
+        }
+        else {
+            this.login();
+        }
+    }
+    login() {
+        tnsOAuthModule.login()
+            .then(() => {
+                console.log('logged in');
+                console.dir("accessToken " + tnsOAuthModule.accessToken());
+                this.token = tnsOAuthModule.accessToken();
+                setString("accesstoken", this.token);
+                this.router.navigate(["manager"]);
+            })
+            .catch((er) => {
+                alert("error during login" + er);
+                //do something with the error 
+            });
+    }
+
+  
     ngOnInit() {
-        // alert("Login Page");
-       
-       
-       /* if (this.auth.isAuthenticated()) {
-            this.router.navigate(['home']);
-        } else {
-            this.auth.login();
-        }*/
+      
     }
 }
