@@ -24,7 +24,9 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 export class LoginComponent implements OnInit {
 
     //constructor(private auth: AuthService, private router: Router) { }
-   constructor( private router: Router) { }
+   constructor( private router: Router, private page: Page) { 
+       this.page.actionBarHidden=true;
+   }
 
 
 token:string;

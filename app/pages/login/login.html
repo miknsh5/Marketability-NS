@@ -1,7 +1,5 @@
 <DockLayout>
     <StackLayout class="title-container" dock="top">
-        <!--<Label class="logo-container" text="MU"></Label>-->
-        <!--<Image src="http://www.philallencvm.com/assets/images/7/Logo_KeyBrand_MarketAbility-da7ebd37.png" stretch="none"></Image>-->
         <Image class="logo-container" src="~/images/logoBlue@2x.png" stretch="aspectFit"></Image>
         <Label class="info-content" text="Be Marketable"></Label>
     </StackLayout>
@@ -9,6 +7,7 @@
 
 
         <Label class="login-title" text="Login or Signup"></Label>
-        <Button text="Login" (tap)="Profile()" Width="100" Height="100"></Button>
+        <Button class="auth-providers" text="" (tap)="tryLogin()" backgroundImage="~/images/linkedin_buttonIcon.png"></Button>
+
     </StackLayout>
 </DockLayout>
