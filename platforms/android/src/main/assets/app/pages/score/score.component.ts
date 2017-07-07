@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, AfterContentChecked, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Page } from 'ui/page';
 import { ProfilePage } from '../../shared/index';
@@ -9,16 +9,11 @@ import { ProfilePage } from '../../shared/index';
     styleUrls: ['pages/score/score-common.css']
 })
 
-export class ScoreComponent implements AfterViewInit {
+export class ScoreComponent {
 
     @Input() score;
-    @Output() currentPage = new EventEmitter<ProfilePage>();
 
     constructor() {
 
-    }
-
-    ngAfterViewInit() {
-        this.currentPage.emit(ProfilePage.Experience);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, AfterContentChecked, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, AfterContentChecked, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
 import { Page } from "ui/page";
 import { PersonProfile, MarketabilityService, ProfilePage } from '../../shared/index';
@@ -9,7 +9,7 @@ import { PersonProfile, MarketabilityService, ProfilePage } from '../../shared/i
     styleUrls: ["pages/calculation/calculation-common.css"]
 })
 
-export class CalculationComponent implements OnInit, AfterViewInit {
+export class CalculationComponent implements OnInit {
 
     @Input() CurrentPersonProfile: PersonProfile;
     @Output() onscore = new EventEmitter<string>();
@@ -26,8 +26,6 @@ export class CalculationComponent implements OnInit, AfterViewInit {
             this.onscore.emit(score);
         }, 2000);
     }
-    
-    ngAfterViewInit() {
-        this.currentPage.emit(ProfilePage.Computation);
-    }
+
+
 }

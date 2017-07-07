@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Page } from 'ui/page';
 import { Skill, ProfilePage } from '../../../app/shared';
@@ -9,16 +9,13 @@ import { Skill, ProfilePage } from '../../../app/shared';
     styleUrls: ['pages/skills/skills-common.css']
 })
 
-export class SkillsComponent implements OnInit, AfterViewInit {
+export class SkillsComponent implements OnInit {
     @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
-    @Output() currentPage = new EventEmitter<ProfilePage>();
+
     ngOnInit() {
         //   alert(this.CurrentProfileSkills);
     }
     constructor() {
 
-    }
-    ngAfterViewInit() {
-        this.currentPage.emit(ProfilePage.Skill);
     }
 }
