@@ -95,6 +95,7 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     onMarketabilityCalculated(score: string) {
+        console.log("score is " + score)
         this.score = score;
         this.onNextButtonClicked(ProfilePage.Computation);
     }

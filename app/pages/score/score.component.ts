@@ -9,11 +9,15 @@ import { ProfilePage } from '../../shared/index';
     styleUrls: ['pages/score/score-common.css']
 })
 
-export class ScoreComponent {
+export class ScoreComponent implements OnInit {
 
     @Input() score;
 
     constructor() {
 
+    }
+
+    ngOnInit() {
+    console.log(" score is " + this.score)
     }
 }
