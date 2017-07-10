@@ -1,6 +1,7 @@
-.profile_container {
+/*.profile_container {
     width: 90%;
-}
+    height: 100%;
+}*/
 
 .profile_label {
     color: rgb(184, 232, 218);
@@ -10,7 +11,6 @@
 .profile_textfield {
     border-style: none;
     border-color: Transparent;
-    overflow: hidden;
     border-bottom: 1px solid rgb(184, 232, 218);
     resize: none;
     font-size: 25px;

@@ -1,11 +1,12 @@
 <script src="//cdn.auth0.com/js/lock/10.8.1/lock.min.js">
 </script>
-<ActionBar [title]="pageTitle" class="appNavBar">
+<ActionBar title="" class="appNavBar">
     <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onPrevButtonClicked(currentPage)" class="prev-button" *ngIf="currentPage > 0 && currentPage !=3"></NavigationButton>
+    <Label [text]="pageTitle"></Label>
 </ActionBar>
 <DockLayout>
 
-    <Progress value="{{ currentProgress }}" class="progress" *ngIf="currentPage < 4" effectiveHeight="100" color="red" dock="top"></Progress>
+    <Progress value="{{ currentProgress }}" class="progress" *ngIf="currentPage < 4" effectiveHeight="100" dock="top"></Progress>
     <DockLayout stretchLastChild="true" class="profile-container" *ngIf="currentProfile" dock="top">
 
         <button dock="bottom" class="next-button" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)" *ngIf="currentPage < 3"></button>
@@ -13,6 +14,6 @@
         <mkb-skills [CurrentProfileSkills]="currentProfile.Skills" *ngIf="currentPage === 1" dock="top"></mkb-skills>
         <mkb-experience [CurrentProfileExperience]="currentProfile.Experience" *ngIf="currentPage === 2" dock="top"></mkb-experience>
         <mkb-calculation [CurrentPersonProfile]="currentProfile" (onscore)="onMarketabilityCalculated($event)" *ngIf="currentPage === 3" dock="top"></mkb-calculation>
-
+        <mkb-score [score]="score" *ngIf="currentPage === 4" dock="top"></mkb-score>
     </DockLayout>
 </DockLayout>
