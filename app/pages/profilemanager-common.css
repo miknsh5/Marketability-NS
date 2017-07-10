@@ -1,12 +1,11 @@
 .appNavBar {
     background-color: rgb(34, 60, 97);
     color: rgb(255, 255, 255);
-    height: 125px;
 }
 
 .profile-container {
-    width: 100%;
-    margin-top: 7%;
+    width: 90%;
+    height: 100%;
 }
 
 .next-button {
@@ -22,9 +21,13 @@
 
 .prev-button {
     color: #FFFFFF;
-    vertical-align: middle;
 }
 
 .progress {
     color: rgb(95, 207, 172);
+    margin-top: -8px;
+}
+
+.page-title {
+    font-size: 25px;
 }

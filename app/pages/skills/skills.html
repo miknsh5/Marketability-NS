@@ -1,7 +1,9 @@
 <GridLayout>
-    <ListView [items]="CurrentProfileSkills">
+    <ListView [items]="CurrentProfileSkills" class="skill_container" separatorColor="transparent">
         <ng-template let-item="item">
-            <Label [text]="item.SkillName"></Label>
+            <GridLayout columns="auto">
+                <Label [text]="item.SkillName" class="skill_items"></Label>
+            </GridLayout>
         </ng-template>
     </ListView>
 </GridLayout>

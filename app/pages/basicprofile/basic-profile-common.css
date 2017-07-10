@@ -1,7 +1,6 @@
-/*.profile_container {
-    width: 90%;
-    height: 100%;
-}*/
+.profile_container {
+    margin-top: 7%;
+}
 
 .profile_label {
     color: rgb(184, 232, 218);
@@ -18,6 +17,5 @@
     padding: 2px 0;
     margin: 0 0 0 0;
     height: auto;
-    /*min-height: 50px;*/
     width: 100%;
 }
