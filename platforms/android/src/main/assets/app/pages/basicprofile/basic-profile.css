@@ -1,5 +1,4 @@
 .profile_container {
-    margin-top: 7%;
     width: 90%;
 }
 
@@ -18,7 +17,7 @@
     color: rgb(36, 60, 97);
     padding: 2px 0;
     margin: 0 0 0 0;
-    height: 50px;
-    min-height: 50px;
+    height: auto;
+    /*min-height: 50px;*/
     width: 100%;
 }
