@@ -1,13 +1,13 @@
 <script src="//cdn.auth0.com/js/lock/10.8.1/lock.min.js">
 </script>
-<ActionBar title="" class="appNavBar">
+<ActionBar title="" class="appNavBar roboto-regular">
     <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onPrevButtonClicked(currentPage)" class="prev-button" *ngIf="currentPage > 0 && currentPage !=3" verticalAlignment="center"></NavigationButton>
     <Label [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
 </ActionBar>
 <StackLayout>
 
     <Progress value="{{ currentProgress }}" class="progress" *ngIf="currentPage < 4" dock="top"></Progress>
-    <DockLayout stretchLastChild="true" class="profile-container" *ngIf="currentProfile" dock="top">
+    <DockLayout stretchLastChild="true" class="profile-container roboto-regular" *ngIf="currentProfile" dock="top">
 
         <button dock="bottom" class="next-button" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)" *ngIf="currentPage < 3"></button>
         <mkb-basic-profile [profile]="currentProfile.Profile" *ngIf="currentPage === 0" dock="top"></mkb-basic-profile>

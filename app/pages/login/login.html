@@ -1,13 +1,12 @@
 <DockLayout>
-    <StackLayout class="title-container" dock="top">
+    <StackLayout class="title-container roboto-regular" dock="top">
         <Image class="logo-container" src="res://logoblue" stretch="aspectFit"></Image>
         <Label class="info-content" text="Be Marketable"></Label>
     </StackLayout>
-    <StackLayout class="login-container" dock="bottom">
-
-
+    <StackLayout class="login-container roboto-regular" dock="bottom">
         <Label class="login-title" text="Login or Signup"></Label>
-        <Button class="auth-providers" text="" (tap)="tryLogin()" backgroundImage="res://linkedin_buttonicon"></Button>
+        <!--<Button class="auth-providers" text="SIGN UP WITH LINKEDIN" (tap)="tryLogin()" backgroundImage="res://in_logo"></Button>-->
+        <Image class="auth-providers" (tap)="tryLogin()" src="res://linkedin_buttonicon" stretch="aspectFit"></Image>
 
     </StackLayout>
 </DockLayout>

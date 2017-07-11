@@ -9,6 +9,9 @@ getProfile(token: string )
   //  alert("token rec by service is "+token);
 let headers = new Headers();
     headers.append("Content-Type", "application/json");
+    headers.append("Host","api.linkedin.com");
+    headers.append("X-Target-URI","https://api.linkedin.com");
+    headers.append("Connection","Keep-Alive");
 return this.http.get(this.profileUrl+token+"&format=json").map(result=>result.json());
 
 }
