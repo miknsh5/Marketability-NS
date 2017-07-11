@@ -2,9 +2,9 @@
     <label text="No experience found"></label>
 </StackLayout>
 
-<StackLayout *ngIf="CurrentProfileExperience != null && CurrentProfileExperience.WorkExperience && CurrentProfileExperience.WorkExperience.length > 0" class="experience_wrapper">
+<StackLayout *ngIf="CurrentProfileExperience != null && CurrentProfileExperience.WorkExperience && CurrentProfileExperience.WorkExperience.length > 0">
 
-    <ListView [items]="CurrentProfileExperience.WorkExperience">
+    <ListView separatorColor="transparent" [items]="CurrentProfileExperience.WorkExperience" class="experience_wrapper">
         <ng-template let-item="item">
             <StackLayout class="experience_container">
                 <label text="Company" class="experience_lable"></label>
