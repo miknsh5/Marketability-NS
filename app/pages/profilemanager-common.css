@@ -6,6 +6,7 @@
 .profile-container {
     width: 90%;
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .next-button {
@@ -30,4 +31,5 @@
 
 .page-title {
     font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
 }
