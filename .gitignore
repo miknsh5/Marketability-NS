@@ -6,7 +6,7 @@
 /out-tsc
 /platforms
 *.js.map
-app/**/*.js
+*.js
 
 # dependencies
 /node_modules
