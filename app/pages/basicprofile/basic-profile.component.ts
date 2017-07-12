@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Page } from "ui/page";
-import { ProfilePage } from '../../shared/index';
+import { ProfilePage, Profile } from '../../shared/index';
 @Component({
     selector: 'mkb-basic-profile',
     templateUrl: 'pages/basicprofile/basic-profile.html',
@@ -9,11 +9,18 @@ import { ProfilePage } from '../../shared/index';
 })
 export class BasicProfileComponent implements OnInit {
 
-    @Input() profile;
+    // @Input() profile;
+    profile: Profile;
 
-    constructor() {
+    constructor(private router: ActivatedRoute) {
+        this.profile = new Profile();
+        this.router.params.subscribe((params) => {
+            this.profile = params["profile"];
+            alert(this.profile);
+        });
+
     }
-    
+
     ngOnInit() {
     }
 }

@@ -49,7 +49,7 @@ export class ProfileManagerComponent implements OnInit {
 
     token: any;
 
-    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService) {
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService, private router: Router) {
 
 
         this.currentPage = ProfilePage.Profile;
@@ -71,6 +71,8 @@ export class ProfileManagerComponent implements OnInit {
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
         this.currentProgress = this.currentProgress + 25;
+        this.navigateToCurrentPage(this.currentPage);
+
         // document.getElementById('progressPercent').style.width = this.currentProgress + '%';
 
     }
@@ -86,8 +88,8 @@ export class ProfileManagerComponent implements OnInit {
         } else {
             this.currentProgress = this.currentProgress - 25;
         }
-
         this.setNavButtonText(this.currentPage);
+        this.navigateToCurrentPage(this.currentPage);
     }
 
     onMarketabilityCalculated(score: string) {
@@ -153,9 +155,9 @@ export class ProfileManagerComponent implements OnInit {
                 companyInfo.EndDate = '';
             }
             userProfile.Experience.WorkExperience.push(companyInfo);
-             userProfile.Experience.WorkExperience.push(companyInfo);
-             userProfile.Experience.WorkExperience.push(companyInfo);
-             userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
         });
         this.currentProfile = userProfile;
         // alert(this.currentProfile.Profile.Name);
@@ -174,79 +176,29 @@ export class ProfileManagerComponent implements OnInit {
             data => this.extractProfileData(data),
             error => this.handleError(error),
             () => console.log("Node Added Complete"));
+    }
 
-
-        /* const userProfile = new PersonProfile();
-         userProfile.Profile = new Profile();
-         userProfile.Skills = new Array<Skill>();
-         userProfile.Experience = new Experience();
-         userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
-         userProfile.Profile.Name = "Anshulee";
-         userProfile.Profile.City = "Mumbai";
-         userProfile.Profile.Occupation = "Founder, Cennest Technologies";
-         ['C#', 'Java', 'JavaScript', 'Python', 'Ruby On Rails'].forEach(elm => {
-             const skill = new Skill();
-             skill.SkillName = elm;
-             userProfile.Skills.push(skill);
-         });
-         this.currentProfile = userProfile;
-         // Fetch profile information
-         /* const userProfile = new PersonProfile();
-          //const accessToken = localStorage.getItem('accessToken');
-          this.lock.getUserInfo(accessToken, (error, profile) => {
-              if (error) {
-                  // Handle error
-                  throw new Error(error);
-              }
-  
-              userProfile.Profile = new Profile();
-              userProfile.Skills = new Array<Skill>();
-              userProfile.Experience = new Experience();
-              userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
-  
-              userProfile.Profile.Name = profile.name;
-              userProfile.Profile.City = profile.location.name;
-              userProfile.Profile.Occupation = profile.headline;
-              ['C#', 'Java', 'JavaScript', 'Python','Ruby On Rails'].forEach(elm => {
-                  const skill = new Skill();
-                  skill.SkillName = elm;
-                  userProfile.Skills.push(skill);
-              });
-  
-              profile.positions.values.forEach(experience => {
-                  const companyInfo = new CompanyInfo();
-                  companyInfo.CompanyName = experience.company.name;
-                  companyInfo.Title = experience.title;
-                  companyInfo.StartDate = experience.startDate.month + ' / ' + experience.startDate.year;
-  
-                  if (!experience.isCurrent) {
-                      companyInfo.EndDate = experience.endDate.month + ' / ' + experience.endDate.year;
-                  } else {
-                      companyInfo.EndDate = '';
-                  }
-                  userProfile.Experience.WorkExperience.push(companyInfo);
-                  userProfile.Experience.WorkExperience.push(companyInfo);
-                  userProfile.Experience.WorkExperience.push(companyInfo);
-                  userProfile.Experience.WorkExperience.push(companyInfo);
-  
-              });
-              this.currentProfile = userProfile;
-          });
-  */
-
-        // dummy experience data
-        /*  let dummyWorkExps = Array<CompanyInfo>();
-  
-          ["HDFC", "L&T", "OmniTech", "Cennest"].forEach(elm => {
-              let companyInfo1 = new CompanyInfo();
-              companyInfo1.CompanyName = elm;
-              companyInfo1.Title = "XYZ";
-              companyInfo1.StartDate = "01/02/2011";
-              companyInfo1.EndDate = "30/07/2013";
-              dummyWorkExps.push(companyInfo1);
-          });
-  
-          this.currentProfile.Experience.WorkExperience = dummyWorkExps;*/
+    private navigateToCurrentPage(currentPage: ProfilePage) {
+        switch (currentPage) {
+            case ProfilePage.Profile:
+                this.router.navigate(["basicprofile", this.currentProfile.Profile]);
+                break;
+            case ProfilePage.Skill:
+                this.router.navigate(["skills", this.currentProfile.Skills]);
+                break;
+            case ProfilePage.Experience:
+                this.router.navigate(["experience", this.currentProfile.Experience]);
+                break;
+            case ProfilePage.Computation:
+                this.router.navigate(["calculation", this.currentProfile]);
+                break;
+            case ProfilePage.Marketability:
+                this.router.navigate(["score", this.score]);
+                break;
+            default:
+                this.router.navigate([""]);
+                break;
+        }
     }
 
 }

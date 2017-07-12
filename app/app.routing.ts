@@ -8,12 +8,16 @@ import { ScoreComponent } from "./pages/score/score.component";
 
 export const routes = [
   { path: "", component: LoginComponent },
-  { path: "basicprofile", component: BasicProfileComponent },
-  { path: "manager", component: ProfileManagerComponent },
-  { path: "skills", component: SkillsComponent },
-  { path: "calculation", component: CalculationComponent },
-  { path: "experience", component: ExperienceComponent },
-  { path: "score", component: ScoreComponent },
+  {
+    path: "manager", component: ProfileManagerComponent, children: [
+      { path: "basicprofile/:profile", component: BasicProfileComponent, outlet: 'profileManagerOutlet' },
+      { path: "skills/:skills", component: SkillsComponent, outlet: 'profileManagerOutlet' },
+      { path: "calculation/:experience", component: CalculationComponent, outlet: 'profileManagerOutlet' },
+      { path: "experience/:currentProfile", component: ExperienceComponent, outlet: 'profileManagerOutlet' },
+      { path: "score/:score", component: ScoreComponent, outlet: 'profileManagerOutlet' },
+    ]
+  },
+
 
 
 ];
