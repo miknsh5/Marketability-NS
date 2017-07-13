@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Page } from 'ui/page';
-import { ProfilePage } from '../../shared/index';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'mkb-score',
@@ -11,9 +9,11 @@ import { ProfilePage } from '../../shared/index';
 
 export class ScoreComponent {
 
-    @Input() score;
+    score;
 
-    constructor() {
-
+    constructor(private route: ActivatedRoute) {
+        this.route.queryParams.subscribe(params => {
+            this.score = params["score"];
+        });
     }
 }

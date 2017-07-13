@@ -1,19 +1,7 @@
 import { Component, OnInit, NgZone } from "@angular/core";
-
 import { Router, NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
-import {
-    getBoolean,
-    setBoolean,
-    getNumber,
-    setNumber,
-    getString,
-    setString,
-    hasKey,
-    remove,
-    clear
-} from "application-settings";
-//import { AuthService } from "../../../app/shared";
+import { hasKey, getString, setString, clear } from "application-settings";
 import * as tnsOAuthModule from 'nativescript-oauth';
 
 @Component({
@@ -25,7 +13,6 @@ export class LoginComponent {
 
     token: string;
 
-    //constructor(private auth: AuthService, private router: Router) { }
     constructor(private router: Router, private page: Page, private zone: NgZone) {
         this.page.actionBarHidden = true;
     }
@@ -34,17 +21,15 @@ export class LoginComponent {
         if (hasKey("accesstoken")) {
             tnsOAuthModule.ensureValidToken()
                 .then((token: string) => {
-                    console.log('token: ' + token);
                     this.token = tnsOAuthModule.accessToken();
-
                     setString("accesstoken", this.token);
-                   // this.zone.run(() => {
+                    this.zone.run(() => {
                         this.router.navigate(["home"]);
-                   // });
+                    });
                 })
                 .catch((er) => {
                     //do something with the error 
-                    alert("error while validation. Logging in again" )
+                    alert("error while validation. Logging in again")
                     tnsOAuthModule.logout();
                     this.login();
                 });
@@ -57,13 +42,11 @@ export class LoginComponent {
     login() {
         tnsOAuthModule.login()
             .then(() => {
-                console.log('logged in');
-                console.dir("accessToken " + tnsOAuthModule.accessToken());
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
-               // this.zone.run(() => {
+                this.zone.run(() => {
                     this.router.navigate(["home"]);
-               // });
+                });
             })
             .catch((er) => {
                 alert("error during login" + er);

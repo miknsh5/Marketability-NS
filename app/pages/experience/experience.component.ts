@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { Page } from "ui/page";
-import { Experience, ProfilePage } from '../../shared/index';
+import { Component, OnInit } from '@angular/core';
+import { getString } from "application-settings";
+
+import { Experience, PersonProfile } from '../../shared/index';
 
 @Component({
   selector: 'mkb-experience',
@@ -9,11 +9,17 @@ import { Experience, ProfilePage } from '../../shared/index';
   styleUrls: ['pages/experience/experience-common.css']
 })
 
-export class ExperienceComponent {
+export class ExperienceComponent implements OnInit {
 
-  @Input() CurrentProfileExperience: Experience;
+  CurrentProfileExperience: Experience;
 
-  constructor() {
+  constructor() { }
 
+  ngOnInit() {
+    let profileInfo = getString("personProfile");
+    if (profileInfo) {
+      const personProfile: PersonProfile = JSON.parse(profileInfo);
+      this.CurrentProfileExperience = personProfile.Experience;
+    }
   }
 }

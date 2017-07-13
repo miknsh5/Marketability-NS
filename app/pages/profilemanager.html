@@ -2,20 +2,17 @@
 </script>
 <ActionBar title="" class="appNavBar roboto-regular">
     <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onPrevButtonClicked(currentPage)" class="prev-button" *ngIf="currentPage > 0 && currentPage !=3" verticalAlignment="center"></NavigationButton>
-    <Label [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
+    <GridLayout columns="*,40">
+        <Label col="0" [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
+        <Image col="1" class="logoutImg" src="res://logout" (tap)="onLogoutButtonClicked()" stretch="none" verticalAlignment="center" *ngIf="currentPage !== 3 "></Image>
+    </GridLayout>
+
 </ActionBar>
 <StackLayout>
 
     <Progress value="{{ currentProgress }}" class="progress" *ngIf="currentPage < 4" dock="top"></Progress>
     <DockLayout stretchLastChild="true" class="profile-container roboto-regular" dock="top">
-
-        <button dock="bottom" class="next-button" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)" *ngIf="profileData && currentPage < 3"></button>
-        <!--<mkb-basic-profile [profile]="currentProfile.Profile" *ngIf="currentPage === 0" dock="top"></mkb-basic-profile>
-        <mkb-skills [CurrentProfileSkills]="currentProfile.Skills" *ngIf="currentPage === 1" dock="top"></mkb-skills>
-        <mkb-experience [CurrentProfileExperience]="currentProfile.Experience" *ngIf="currentPage === 2" dock="top"></mkb-experience>
-        <mkb-calculation [CurrentPersonProfile]="currentProfile" (onscore)="onMarketabilityCalculated($event)" *ngIf="currentPage === 3" dock="top"></mkb-calculation>
-        <mkb-score [score]="score" *ngIf="currentPage === 4" dock="top"></mkb-score>-->
-
+        <button dock="bottom" class="next-button" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)" *ngIf="personProfile && currentPage < 3"></button>
         <router-outlet></router-outlet>
     </DockLayout>
 </StackLayout>

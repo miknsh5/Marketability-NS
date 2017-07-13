@@ -6,13 +6,11 @@
 .profile-container {
     width: 90%;
     height: 100%;
-    /*font-family: Arial, Helvetica, sans-serif;*/
 }
 
 .next-button {
     background-color: rgb(95, 207, 172);
     width: 50%;
-    /*max-width: 310px;*/
     margin: 0 auto;
     display: table;
     margin-bottom: 5%;
@@ -26,10 +24,8 @@
 
 .progress {
     color: rgb(95, 207, 172);
-    margin-top: -8px;
 }
 
 .page-title {
     font-size: 25px;
-    /*font-family: Arial, Helvetica, sans-serif;*/
 }

@@ -9,8 +9,10 @@
 
 .profile_textfield {
     border-style: none;
-    border-color: Transparent;
-    border-bottom: 1px solid rgb(184, 232, 218);
+    /*border-color: black;*/
+    border-bottom-color: #B8E8DA;
+    border-bottom-width: 2px;
+    /*border-bottom: 1px solid rgb(184, 232, 218);*/
     resize: none;
     font-size: 25px;
     color: rgb(36, 60, 97);

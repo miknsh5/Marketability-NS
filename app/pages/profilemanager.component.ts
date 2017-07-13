@@ -1,35 +1,29 @@
-import { Component, OnInit, NgZone } from "@angular/core";
+import { Component, OnInit, NgZone, OnDestroy } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
-
 import { Router, NavigationExtras } from "@angular/router";
+import { hasKey, getString, setString, remove } from "application-settings";
+import "rxjs/Rx";
+import * as tnsOAuthModule from 'nativescript-oauth';
+import * as application from "application";
+import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
+import { isAndroid } from "platform";
+
+import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
 import { Page } from "ui/page";
 import {
-    getBoolean,
-    setBoolean,
-    getNumber,
-    setNumber,
-    getString,
-    setString,
-    hasKey,
-    remove,
-    clear
-} from "application-settings";
-
-import "rxjs/Rx";
-import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
-import {
-    PersonProfile, Skill, Profile, ProfileData,
-    Experience, CompanyInfo, ProfilePage, MarketabilityService, ProfileService,
+    PersonProfile, Skill, Profile, Experience, CompanyInfo,
+    ProfilePage, MarketabilityService, ProfileService,
 } from '../shared/index';
 
 declare var Auth0Lock: any;
+
 @Component({
     selector: 'mkb-profilemanager',
     templateUrl: 'pages/profilemanager.html',
     providers: [MarketabilityService, ProfileService],
     styleUrls: ["pages/profilemanager-common.css", "pages/profilemanager.css"]
 })
-export class ProfileManagerComponent implements OnInit {
+export class ProfileManagerComponent implements OnInit, OnDestroy {
 
     currentPage: ProfilePage;
     score: string;
@@ -38,6 +32,7 @@ export class ProfileManagerComponent implements OnInit {
     lock: any;
     elementProgressBar: any;
     currentProgress: number;
+    personProfile: PersonProfile;
 
     forwardNavigaton: Array<ProfilePage> = [ProfilePage.Profile, ProfilePage.Skill,
     ProfilePage.Experience, ProfilePage.Computation, ProfilePage.Marketability];
@@ -47,10 +42,8 @@ export class ProfileManagerComponent implements OnInit {
 
     token: any;
 
-    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
-        private router: Router, private profileData: ProfileData) {
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService, private router: Router) {
         this.currentPage = ProfilePage.Profile;
-        // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
         this.currentPage = this.forwardNavigaton[0];
         this.currentProgress = 25;
     }
@@ -59,43 +52,61 @@ export class ProfileManagerComponent implements OnInit {
         this.getProfile();
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
+
+        if (isAndroid) {
+            application.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                if (this.currentPage !== ProfilePage.Profile) {
+                    data.cancel = true;
+                    this.onPrevButtonClicked(this.currentPage);
+                }
+            });
+        }
+    }
+
+    ngOnDestroy() {
+        console.log("------destroy-----------");
+        if (isAndroid) {
+            application.android.off(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                if (this.currentPage !== ProfilePage.Profile) {
+                    data.cancel = true;
+                    this.onPrevButtonClicked(this.currentPage);
+                }
+            });
+        }
     }
 
     onNextButtonClicked(page: ProfilePage) {
         const currentIndex = this.forwardNavigaton.indexOf(page);
         this.currentPage = this.forwardNavigaton[currentIndex + 1];
-        this.setPageTitle(this.currentPage);
-        this.setNavButtonText(this.currentPage);
         this.currentProgress = this.currentProgress + 25;
         this.navigateToCurrentPage(this.currentPage);
-
-        // document.getElementById('progressPercent').style.width = this.currentProgress + '%';
-
     }
 
     onPrevButtonClicked(page: ProfilePage) {
-
         const currentIndex = this.prevNavigaton.indexOf(page);
         this.currentPage = this.prevNavigaton[currentIndex - 1];
-        this.setPageTitle(this.currentPage);
 
         if (page === ProfilePage.Marketability) {
             this.currentProgress = 75;
         } else {
             this.currentProgress = this.currentProgress - 25;
         }
-        this.setNavButtonText(this.currentPage);
         this.navigateToCurrentPage(this.currentPage);
     }
 
-    onMarketabilityCalculated(score: string) {
-        this.score = score;
-        this.onNextButtonClicked(ProfilePage.Computation);
+    calculateMarketability() {
+        setTimeout(() => {
+            this.score = this.marketabilityService.calculateMarketability(this.personProfile);
+            this.currentPage = ProfilePage.Computation;
+            this.onNextButtonClicked(ProfilePage.Computation);
+        }, 2000);
     }
 
     onLogoutButtonClicked() {
-        // this.authService.logout();
-        alert('logout button pressed...!');
+        tnsOAuthModule.logout();
+        remove("accesstoken");
+        remove("personProfile");
+        this.router.navigate(['']);
     }
 
     setPageTitle(page: ProfilePage) {
@@ -123,7 +134,6 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     extractProfileData(profile: any) {
-         alert(profile.firstName);
         let userProfile = new PersonProfile();
         userProfile.Profile = new Profile();
         userProfile.Skills = new Array<Skill>();
@@ -133,6 +143,7 @@ export class ProfileManagerComponent implements OnInit {
         userProfile.Profile.Name = profile.firstName + " " + profile.lastName;
         userProfile.Profile.City = profile.location.name;
         userProfile.Profile.Occupation = profile.headline;
+
         ['C#', 'Java', 'JavaScript', 'Python', 'Ruby On Rails'].forEach(elm => {
             const skill = new Skill();
             skill.SkillName = elm;
@@ -155,22 +166,18 @@ export class ProfileManagerComponent implements OnInit {
             userProfile.Experience.WorkExperience.push(companyInfo);
             userProfile.Experience.WorkExperience.push(companyInfo);
         });
-        this.profileData.personProfile = userProfile;
-        let profileInfo=JSON.stringify(this.profileData.personProfile);
-        setString("personProfile",profileInfo);
-        console.log(profileInfo);
+        this.personProfile = userProfile;
+        setString("personProfile", JSON.stringify(this.personProfile));
         this.navigateToCurrentPage(this.currentPage);
     }
+
     handleError(error: any) {
-        alert(error + "extractProfileData");
+        alert('Error while fetching profile' + error);
     }
 
     public getProfile() {
-        // alert("get profile called");
         this.token = getString("accesstoken");
-        if (this.token === null) {
-            //reroute to login page
-        }
+
         this.profileService.getProfile(this.token).subscribe(
             data => this.extractProfileData(data),
             error => this.handleError(error),
@@ -178,14 +185,9 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     private navigateToCurrentPage(currentPage: ProfilePage) {
-        alert("navigate to current page called"+currentPage);
         switch (currentPage) {
             case ProfilePage.Profile:
-                console.log('-----------navigateToCurrentPage------------')
-                console.dir(this.profileData.personProfile);
-                //this.zone.run(() => {
-                    this.router.navigate(['home/basicprofile']);
-                //});
+                this.router.navigate(['home/basicprofile']);
                 break;
             case ProfilePage.Skill:
                 this.router.navigate(["home/skills"]);
@@ -195,14 +197,17 @@ export class ProfileManagerComponent implements OnInit {
                 break;
             case ProfilePage.Computation:
                 this.router.navigate(["home/calculation"]);
+                this.calculateMarketability();
                 break;
             case ProfilePage.Marketability:
-                this.router.navigate(["home/score", this.score]);
+                this.router.navigate(["home/score"], { queryParams: { "score": this.score } });
                 break;
             default:
                 this.router.navigate([""]);
                 break;
         }
+        this.setPageTitle(this.currentPage);
+        this.setNavButtonText(this.currentPage);
     }
 
 }

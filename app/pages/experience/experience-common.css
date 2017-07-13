@@ -10,8 +10,10 @@
 
 .experience_TextView {
     border-style: none;
-    border-color: Transparent;
-    border-bottom: 1px solid rgb(184, 232, 218);
+    /*border-color: Transparent;
+    border-bottom: 1px solid rgb(184, 232, 218);*/
+    border-bottom-color: #B8E8DA;
+    border-bottom-width: 2px;
     resize: none;
     color: rgb(36, 60, 97);
     padding: 2px 0;
