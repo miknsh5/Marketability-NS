@@ -4,9 +4,9 @@
 /dist
 /tmp
 /out-tsc
-/platforms
-*.js.map
-*.js
+platforms/*
+**/*.js.map
+**/*.js
 
 # dependencies
 /node_modules
