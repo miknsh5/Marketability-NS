@@ -1,18 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from "ui/page";
-import { ProfilePage, Profile, ProfileData, PersonProfile } from '../../shared/index';
-import {
-    getBoolean,
-    setBoolean,
-    getNumber,
-    setNumber,
-    getString,
-    setString,
-    hasKey,
-    remove,
-    clear
-} from "application-settings";
+import { getString } from "application-settings";
+
+import { Profile, PersonProfile } from '../../shared/index';
 
 @Component({
     selector: 'mkb-basic-profile',
@@ -21,21 +11,15 @@ import {
 })
 export class BasicProfileComponent implements OnInit {
 
-    // @Input() profile;
     profile: Profile;
 
-    constructor(private profileData: ProfileData) {
-        console.log('-----------BasicProfileComponent------------')
-        // console.log(profileData);
-        //this.profile = this.profileData.personProfile.Profile;
-        
-    }
+    constructor() { }
 
     ngOnInit() {
-        
-        let profileInfo=getString("personProfile");
-        let personProfile:PersonProfile=JSON.parse(profileInfo);
-        this.profile=personProfile.Profile;
-        alert(this.profile);
+        const profileInfo = getString('personProfile');
+        if (profileInfo) {
+            const personProfile: PersonProfile = JSON.parse(profileInfo);
+            this.profile = personProfile.Profile;
+        }
     }
 }

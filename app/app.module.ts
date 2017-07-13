@@ -5,14 +5,11 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { AppComponent } from "./app.component";
 import { routes, navigatableComponents } from "./app.routing";
-import { ProfileData } from './shared/models/profile-data.model'
 
 @NgModule({
   imports: [NativeScriptModule, NativeScriptFormsModule, NativeScriptRouterModule, NativeScriptHttpModule,
     NativeScriptRouterModule.forRoot(routes)],
   declarations: [AppComponent, ...navigatableComponents],
-  bootstrap: [AppComponent],
-  providers: [ProfileData]
-
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

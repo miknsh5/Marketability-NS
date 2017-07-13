@@ -1,4 +1,4 @@
-<GridLayout>
+<GridLayout *ngIf="CurrentProfileSkills && CurrentProfileSkills.length > 0">
     <ListView [items]="CurrentProfileSkills" class="skill_container" separatorColor="transparent">
         <ng-template let-item="item">
             <GridLayout columns="auto">

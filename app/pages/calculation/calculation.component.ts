@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, AfterContentChecked, Output, EventEmitter } from '@angular/core';
-import { Router } from "@angular/router";
-import { Page } from "ui/page";
-import { PersonProfile, MarketabilityService, ProfilePage } from '../../shared/index';
+import { Router, ActivatedRoute } from "@angular/router";
+import { getString } from "application-settings";
+
+import { PersonProfile, MarketabilityService } from '../../shared/index';
 
 @Component({
     selector: 'mkb-calculation',
@@ -11,20 +12,22 @@ import { PersonProfile, MarketabilityService, ProfilePage } from '../../shared/i
 
 export class CalculationComponent implements OnInit {
 
-    @Input() CurrentPersonProfile: PersonProfile;
-    @Output() onscore = new EventEmitter<string>();
-    @Output() currentPage = new EventEmitter<ProfilePage>();
+    profile: PersonProfile;
 
-    constructor(private marketabilityService: MarketabilityService) {
+    constructor(private marketabilityService: MarketabilityService, private router: Router, private route: ActivatedRoute) {
 
     }
 
     ngOnInit(): void {
-
-        setTimeout(() => {
-            let score = this.marketabilityService.calculateMarketability(this.CurrentPersonProfile);
-            this.onscore.emit(score);
-        }, 2000);
+        const profileInfo = getString('personProfile');
+        if (profileInfo) {
+            const personProfile: PersonProfile = JSON.parse(profileInfo);
+            this.profile = personProfile;
+            setTimeout(() => {
+                let score = this.marketabilityService.calculateMarketability(this.profile);
+                this.router.navigate(["profile/score", score])
+            }, 2000);
+        }
     }
 
 

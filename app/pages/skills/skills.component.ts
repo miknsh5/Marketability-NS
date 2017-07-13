@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Page } from 'ui/page';
-import { Skill, ProfilePage } from '../../../app/shared';
+import { ActivatedRoute } from '@angular/router';
+import { getString } from "application-settings";
+
+import { Skill, PersonProfile } from '../../../app/shared';
 
 @Component({
     selector: 'mkb-skills',
@@ -10,12 +11,15 @@ import { Skill, ProfilePage } from '../../../app/shared';
 })
 
 export class SkillsComponent implements OnInit {
-    @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
+    CurrentProfileSkills: Array<Skill> = Array<Skill>();
+
+    constructor() { }
 
     ngOnInit() {
-        //   alert(this.CurrentProfileSkills);
-    }
-    constructor() {
-
+        const profileInfo = getString('personProfile');
+        if (profileInfo) {
+            const personProfile: PersonProfile = JSON.parse(profileInfo);
+            this.CurrentProfileSkills = personProfile.Skills;
+        }
     }
 }

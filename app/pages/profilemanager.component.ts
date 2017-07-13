@@ -1,25 +1,15 @@
 import { Component, OnInit, NgZone } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 
-import { Router, NavigationExtras } from "@angular/router";
+import { Router } from "@angular/router";
 import { Page } from "ui/page";
-import {
-    getBoolean,
-    setBoolean,
-    getNumber,
-    setNumber,
-    getString,
-    setString,
-    hasKey,
-    remove,
-    clear
-} from "application-settings";
+import { setString } from "application-settings";
 
 import "rxjs/Rx";
 import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
 import {
-    PersonProfile, Skill, Profile, ProfileData,
-    Experience, CompanyInfo, ProfilePage, MarketabilityService, ProfileService,
+    PersonProfile, Skill, Profile, Experience, CompanyInfo,
+    ProfilePage, MarketabilityService, ProfileService,
 } from '../shared/index';
 
 declare var Auth0Lock: any;
@@ -47,8 +37,7 @@ export class ProfileManagerComponent implements OnInit {
 
     token: any;
 
-    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
-        private router: Router, private profileData: ProfileData, private zone: NgZone) {
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService, private router: Router) {
         this.currentPage = ProfilePage.Profile;
         // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
         this.currentPage = this.forwardNavigaton[0];
@@ -151,11 +140,10 @@ export class ProfileManagerComponent implements OnInit {
             userProfile.Experience.WorkExperience.push(companyInfo);
             userProfile.Experience.WorkExperience.push(companyInfo);
         });
-        this.profileData.personProfile = userProfile;
-        let profileInfo = JSON.stringify(this.profileData.personProfile);
-        setString("personProfile", profileInfo);
-        console.log(profileInfo);
+        setString("personProfile", JSON.stringify(userProfile));
+        this.navigateToCurrentPage(this.currentPage);
     }
+
     handleError(error: any) {
         alert(error + "extractProfileData");
     }
@@ -175,13 +163,13 @@ export class ProfileManagerComponent implements OnInit {
     private navigateToCurrentPage(currentPage: ProfilePage) {
         switch (currentPage) {
             case ProfilePage.Profile:
-                this.router.navigate(["profile"]);
+                this.router.navigate(["profile/basic"]);
                 break;
             case ProfilePage.Skill:
                 this.router.navigate(["profile/skills"]);
                 break;
             case ProfilePage.Experience:
-                this.router.navigate(["profile/experience"]);
+                this.router.navigate(["/profile/experience"]);
                 break;
             case ProfilePage.Computation:
                 this.router.navigate(["profile/calculation"]);
