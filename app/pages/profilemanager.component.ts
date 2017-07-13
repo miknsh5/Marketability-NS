@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
 import {
     getBoolean,
@@ -18,7 +18,7 @@ import {
 import "rxjs/Rx";
 import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
 import {
-    PersonProfile, Skill, Profile,
+    PersonProfile, Skill, Profile, ProfileData,
     Experience, CompanyInfo, ProfilePage, MarketabilityService, ProfileService,
 } from '../shared/index';
 
@@ -28,12 +28,10 @@ declare var Auth0Lock: any;
     templateUrl: 'pages/profilemanager.html',
     providers: [MarketabilityService, ProfileService],
     styleUrls: ["pages/profilemanager-common.css", "pages/profilemanager.css"]
-
 })
 export class ProfileManagerComponent implements OnInit {
 
     currentPage: ProfilePage;
-    currentProfile: PersonProfile;
     score: string;
     pageTitle: string;
     navButtonText: string;
@@ -49,14 +47,12 @@ export class ProfileManagerComponent implements OnInit {
 
     token: any;
 
-    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService, private router: Router) {
-
-
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
+        private router: Router, private profileData: ProfileData, private zone: NgZone) {
         this.currentPage = ProfilePage.Profile;
         // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
         this.currentPage = this.forwardNavigaton[0];
         this.currentProgress = 25;
-
     }
 
     ngOnInit() {
@@ -159,8 +155,8 @@ export class ProfileManagerComponent implements OnInit {
             userProfile.Experience.WorkExperience.push(companyInfo);
             userProfile.Experience.WorkExperience.push(companyInfo);
         });
-        this.currentProfile = userProfile;
-        // alert(this.currentProfile.Profile.Name);
+        this.profileData.personProfile = userProfile;
+        this.navigateToCurrentPage(this.currentPage);
     }
     handleError(error: any) {
         alert(error + "extractProfileData");
@@ -181,19 +177,23 @@ export class ProfileManagerComponent implements OnInit {
     private navigateToCurrentPage(currentPage: ProfilePage) {
         switch (currentPage) {
             case ProfilePage.Profile:
-                this.router.navigate(["basicprofile", this.currentProfile.Profile]);
+                console.log('-----------navigateToCurrentPage------------')
+                console.dir(this.profileData.personProfile);
+                this.zone.run(() => {
+                    this.router.navigate(["manager/basicprofile"]);
+                });
                 break;
             case ProfilePage.Skill:
-                this.router.navigate(["skills", this.currentProfile.Skills]);
+                this.router.navigate(["/skills"]);
                 break;
             case ProfilePage.Experience:
-                this.router.navigate(["experience", this.currentProfile.Experience]);
+                this.router.navigate(["/experience"]);
                 break;
             case ProfilePage.Computation:
-                this.router.navigate(["calculation", this.currentProfile]);
+                this.router.navigate(["/calculation"]);
                 break;
             case ProfilePage.Marketability:
-                this.router.navigate(["score", this.score]);
+                this.router.navigate(["/score", this.score]);
                 break;
             default:
                 this.router.navigate([""]);

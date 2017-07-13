@@ -29,16 +29,12 @@ export class ProfileService {
         headers.append("X-Target-URI", "https://api.linkedin.com");
         headers.append("Connection", "Keep-Alive");
         return this.http.get(this.profileUrl + token + "&format=json").map(result => result.json());
-
-
-
       })
       .catch((er) => {
         //do something with the error 
         alert("invalid token.Please login again");
 
         //  return this.http.get(this.profileUrl + token + "&format=json").map(result => result.json());
-        ;
       });
     //  alert("token rec by service is "+token);
 
