@@ -3,7 +3,7 @@
 </StackLayout>
 
 <StackLayout *ngIf="CurrentProfileExperience != null && CurrentProfileExperience.WorkExperience && CurrentProfileExperience.WorkExperience.length > 0">
-
+    
     <ListView separatorColor="transparent" [items]="CurrentProfileExperience.WorkExperience" class="experience_wrapper">
         <ng-template let-item="item">
             <StackLayout class="experience_container">

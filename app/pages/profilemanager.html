@@ -1,10 +1,14 @@
 <script src="//cdn.auth0.com/js/lock/10.8.1/lock.min.js">
+
 </script>
 <ActionBar title="" class="appNavBar roboto-regular">
-    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onPrevButtonClicked(currentPage)" class="prev-button" *ngIf="currentPage > 0 && currentPage !=3" verticalAlignment="center"></NavigationButton>
-    <GridLayout columns="*,40">
-        <Label col="0" [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
-        <Image col="1" class="logoutImg" src="res://logout" (tap)="onLogoutButtonClicked()" stretch="none" verticalAlignment="center" *ngIf="currentPage !== 3 "></Image>
+    <NavigationButton visibility="collapse" text="Go Back" android.systemIcon="ic_menu_back" verticalAlignment="center"></NavigationButton>
+    <GridLayout columns="auto,*,60">
+        <Image col="0" class="logoutImg" src="res://ic_chevron_left" (tap)="onPrevButtonClicked(currentPage)" stretch="none" verticalAlignment="center"
+            *ngIf="currentPage > 0 && currentPage !=3"></Image>
+        <Label col="1" [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
+        <Image col="2" class="logoutImg" src="res://ic_exit" (tap)="onLogoutButtonClicked()" stretch="none" verticalAlignment="center"
+            *ngIf="currentPage !== 3 "></Image>
     </GridLayout>
 </ActionBar>
 <StackLayout>
