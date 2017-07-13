@@ -6,10 +6,8 @@
         <Label col="0" [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
         <Image col="1" class="logoutImg" src="res://logout" (tap)="onLogoutButtonClicked()" stretch="none" verticalAlignment="center" *ngIf="currentPage !== 3 "></Image>
     </GridLayout>
-
 </ActionBar>
 <StackLayout>
-
     <Progress value="{{ currentProgress }}" class="progress" *ngIf="currentPage < 4" dock="top"></Progress>
     <DockLayout stretchLastChild="true" class="profile-container roboto-regular" dock="top">
         <button dock="bottom" class="next-button" [text]="navButtonText" (tap)="onNextButtonClicked(currentPage)" *ngIf="personProfile && currentPage < 3"></button>

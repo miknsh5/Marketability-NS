@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone, OnDestroy } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 import { Router, NavigationExtras } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router";
 import { hasKey, getString, setString, remove } from "application-settings";
 import "rxjs/Rx";
 import * as tnsOAuthModule from 'nativescript-oauth';
@@ -42,7 +43,8 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
 
     token: any;
 
-    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService, private router: Router) {
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
+        private router: Router, private routerExtensions: RouterExtensions) {
         this.currentPage = ProfilePage.Profile;
         this.currentPage = this.forwardNavigaton[0];
         this.currentProgress = 25;
@@ -91,7 +93,12 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
         } else {
             this.currentProgress = this.currentProgress - 25;
         }
-        this.navigateToCurrentPage(this.currentPage);
+        this.setPageTitle(this.currentPage);
+        this.setNavButtonText(this.currentPage);
+        if (page === ProfilePage.Marketability) {
+            this.routerExtensions.back();
+        }
+        this.routerExtensions.back();
     }
 
     calculateMarketability() {
