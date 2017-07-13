@@ -1,20 +1,26 @@
-import { Component, Input,OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import {Page} from "ui/page";
-import { Skill } from "../../../app/shared";
+import { Component, OnInit } from '@angular/core';
+import { getString } from "application-settings";
+
+import { Skill, PersonProfile } from '../../shared/index';
+
 @Component({
     selector: 'mkb-skills',
     templateUrl: 'pages/skills/skills.html',
-    styleUrls: ["pages/skills/skills-common.css"]
+    styleUrls: ['pages/skills/skills-common.css']
 })
-export class SkillsComponent implements OnInit{
- @Input() CurrentProfileSkills: Array<Skill> = Array<Skill>();
-  ngOnInit()
- {
-  alert("Skills");
- }
-   
-    constructor() {
-   
+
+export class SkillsComponent implements OnInit {
+
+    CurrentProfileSkills: Array<Skill> = Array<Skill>();
+
+    constructor() { }
+
+    ngOnInit() {
+        let profileInfo = getString("personProfile");
+        if (profileInfo) {
+            const personProfile: PersonProfile = JSON.parse(profileInfo);
+            this.CurrentProfileSkills = personProfile.Skills;
+        }
     }
+
 }

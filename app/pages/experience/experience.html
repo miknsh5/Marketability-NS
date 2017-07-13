@@ -1,0 +1,28 @@
+<StackLayout *ngIf="CurrentProfileExperience == null || CurrentProfileExperience.WorkExperience == null ||CurrentProfileExperience.WorkExperience.length == 0">
+    <label text="No experience found"></label>
+</StackLayout>
+
+<StackLayout *ngIf="CurrentProfileExperience != null && CurrentProfileExperience.WorkExperience && CurrentProfileExperience.WorkExperience.length > 0">
+
+    <ListView separatorColor="transparent" [items]="CurrentProfileExperience.WorkExperience" class="experience_wrapper">
+        <ng-template let-item="item">
+            <StackLayout class="experience_container">
+                <label text="Company" class="experience_lable"></label>
+                <TextView [text]="item.CompanyName" class="experience_TextView experience_companyName" editable="false" textWrap="true"></TextView>
+                <label text="Title" class="experience_lable"></label>
+                <TextView [text]="item.Title" class="experience_TextView experience_title" editable="false" textWrap="true"></TextView>
+                <GridLayout columns="*,*">
+                    <StackLayout row="0" col="0">
+                        <label text="Start Date" class="experience_lable"></label>
+                        <TextField [text]="item.StartDate" editable="false" class="experience_TextView"></TextField>
+                    </StackLayout>
+                    <StackLayout row="0" col="1">
+                        <label text="End Date" class="experience_lable"></label>
+                        <TextField [text]="item.EndDate" editable="false" class="experience_TextView"></TextField>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+
+</StackLayout>

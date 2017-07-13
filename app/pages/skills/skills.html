@@ -1,4 +1,9 @@
-<StackLayout>
-    <label text="Skill"></label>
-    
-</StackLayout>
+<GridLayout *ngIf="CurrentProfileSkills && CurrentProfileSkills.length > 0">
+    <ListView [items]="CurrentProfileSkills" class="skill_container" separatorColor="transparent">
+        <ng-template let-item="item">
+            <GridLayout columns="auto">
+                <Label [text]="item.SkillName" class="skill_items"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+</GridLayout>
