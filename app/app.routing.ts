@@ -10,9 +10,8 @@ import { LoadingComponent } from "./pages/loading/loading.component";
 export const routes = [
   { path: "", component: LoginComponent },
   {
-    path: "home", component: ProfileManagerComponent, children: [
-      { path: "", component: LoadingComponent, outlet: 'profileManagerOutlet' },
-      { path: "basicprofile", component: BasicProfileComponent, outlet: 'profileManagerOutlet' },
+    path: "profile", component: ProfileManagerComponent, children: [
+      { path: "", component: BasicProfileComponent, outlet: 'profileManagerOutlet' },
       { path: "skills", component: SkillsComponent, outlet: 'profileManagerOutlet' },
       { path: "calculation", component: CalculationComponent, outlet: 'profileManagerOutlet' },
       { path: "experience", component: ExperienceComponent, outlet: 'profileManagerOutlet' },

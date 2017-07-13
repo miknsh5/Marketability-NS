@@ -39,7 +39,7 @@ export class LoginComponent {
 
                     setString("accesstoken", this.token);
                     this.zone.run(() => {
-                        this.router.navigate(["home"]);
+                        this.router.navigate(["profile"]);
                     });
                 })
                 .catch((er) => {
@@ -62,7 +62,7 @@ export class LoginComponent {
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
                 this.zone.run(() => {
-                    this.router.navigate(["home"]);
+                    this.router.navigate(["profile"]);
                 });
             })
             .catch((er) => {

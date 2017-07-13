@@ -56,9 +56,9 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getProfile();
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
+        this.getProfile();
     }
 
     onNextButtonClicked(page: ProfilePage) {
@@ -68,13 +68,9 @@ export class ProfileManagerComponent implements OnInit {
         this.setNavButtonText(this.currentPage);
         this.currentProgress = this.currentProgress + 25;
         this.navigateToCurrentPage(this.currentPage);
-
-        // document.getElementById('progressPercent').style.width = this.currentProgress + '%';
-
     }
 
     onPrevButtonClicked(page: ProfilePage) {
-
         const currentIndex = this.prevNavigaton.indexOf(page);
         this.currentPage = this.prevNavigaton[currentIndex - 1];
         this.setPageTitle(this.currentPage);
@@ -156,10 +152,9 @@ export class ProfileManagerComponent implements OnInit {
             userProfile.Experience.WorkExperience.push(companyInfo);
         });
         this.profileData.personProfile = userProfile;
-        let profileInfo=JSON.stringify(this.profileData.personProfile);
-        setString("personProfile",profileInfo);
+        let profileInfo = JSON.stringify(this.profileData.personProfile);
+        setString("personProfile", profileInfo);
         console.log(profileInfo);
-        this.navigateToCurrentPage(this.currentPage);
     }
     handleError(error: any) {
         alert(error + "extractProfileData");
@@ -180,23 +175,19 @@ export class ProfileManagerComponent implements OnInit {
     private navigateToCurrentPage(currentPage: ProfilePage) {
         switch (currentPage) {
             case ProfilePage.Profile:
-                console.log('-----------navigateToCurrentPage------------')
-                console.dir(this.profileData.personProfile);
-                this.zone.run(() => {
-                    this.router.navigate(["manager/basicprofile"]);
-                });
+                this.router.navigate(["profile"]);
                 break;
             case ProfilePage.Skill:
-                this.router.navigate(["/skills"]);
+                this.router.navigate(["profile/skills"]);
                 break;
             case ProfilePage.Experience:
-                this.router.navigate(["/experience"]);
+                this.router.navigate(["profile/experience"]);
                 break;
             case ProfilePage.Computation:
-                this.router.navigate(["/calculation"]);
+                this.router.navigate(["profile/calculation"]);
                 break;
             case ProfilePage.Marketability:
-                this.router.navigate(["/score", this.score]);
+                this.router.navigate(["profile/score", this.score]);
                 break;
             default:
                 this.router.navigate([""]);
