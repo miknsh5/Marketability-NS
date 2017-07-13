@@ -156,6 +156,9 @@ export class ProfileManagerComponent implements OnInit {
             userProfile.Experience.WorkExperience.push(companyInfo);
         });
         this.profileData.personProfile = userProfile;
+        let profileInfo=JSON.stringify(this.profileData.personProfile);
+        setString("personProfile",profileInfo);
+        console.log(profileInfo);
         this.navigateToCurrentPage(this.currentPage);
     }
     handleError(error: any) {
