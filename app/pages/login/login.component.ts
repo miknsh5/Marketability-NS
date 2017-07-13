@@ -38,13 +38,13 @@ export class LoginComponent {
                     this.token = tnsOAuthModule.accessToken();
 
                     setString("accesstoken", this.token);
-                    this.zone.run(() => {
+                   // this.zone.run(() => {
                         this.router.navigate(["home"]);
-                    });
+                   // });
                 })
                 .catch((er) => {
                     //do something with the error 
-                    alert("error while validation. Logging in again" + er)
+                    alert("error while validation. Logging in again" )
                     tnsOAuthModule.logout();
                     this.login();
                 });
@@ -61,9 +61,9 @@ export class LoginComponent {
                 console.dir("accessToken " + tnsOAuthModule.accessToken());
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
-                this.zone.run(() => {
+               // this.zone.run(() => {
                     this.router.navigate(["home"]);
-                });
+               // });
             })
             .catch((er) => {
                 alert("error during login" + er);

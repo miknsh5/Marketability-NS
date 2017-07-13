@@ -1,7 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
-import { ProfilePage } from '../../shared/index';
+import { ProfilePage, Profile, ProfileData, PersonProfile } from '../../shared/index';
+import {
+    getBoolean,
+    setBoolean,
+    getNumber,
+    setNumber,
+    getString,
+    setString,
+    hasKey,
+    remove,
+    clear
+} from "application-settings";
+
 @Component({
     selector: 'mkb-basic-profile',
     templateUrl: 'pages/basicprofile/basic-profile.html',
@@ -9,11 +22,21 @@ import { ProfilePage } from '../../shared/index';
 })
 export class BasicProfileComponent implements OnInit {
 
-    @Input() profile;
+    // @Input() profile;
+    profile: Profile;
 
-    constructor() {
+    constructor(private router: Router) {
+        console.log('-----------BasicProfileComponent------------')
+        // console.log(profileData);
+        //this.profile = this.profileData.personProfile.Profile;
+        
     }
-    
+
     ngOnInit() {
+        
+        let profileInfo=getString("personProfile");
+        let personProfile:PersonProfile=JSON.parse(profileInfo);
+        this.profile=personProfile.Profile;
+        alert(this.profile);
     }
 }

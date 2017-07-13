@@ -1,5 +1,21 @@
 [
     {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\drawable-hdpi\\logo.png",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\main\\res\\drawable-hdpi\\logo.png"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\drawable-hdpi\\in_logo.png",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\main\\res\\drawable-hdpi\\in_logo.png"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\drawable-hdpi\\logoblue.png",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\main\\res\\drawable-hdpi\\logoblue.png"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\drawable-hdpi\\linkedin_buttonicon.png",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\main\\res\\drawable-hdpi\\linkedin_buttonicon.png"
+    },
+    {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\drawable-hdpi\\icon.png",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\main\\res\\drawable-hdpi\\icon.png"
     }

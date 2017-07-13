@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
 
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
 import {
     getBoolean,
@@ -18,22 +18,20 @@ import {
 import "rxjs/Rx";
 import { AUTH_CONFIG } from '../shared/services/auth/auth.config';
 import {
-    PersonProfile, Skill, Profile,
-    Experience, CompanyInfo, ProfilePage, MarketabilityService,ProfileService,
+    PersonProfile, Skill, Profile, ProfileData,
+    Experience, CompanyInfo, ProfilePage, MarketabilityService, ProfileService,
 } from '../shared/index';
 
 declare var Auth0Lock: any;
 @Component({
     selector: 'mkb-profilemanager',
     templateUrl: 'pages/profilemanager.html',
-    providers: [MarketabilityService,ProfileService],
+    providers: [MarketabilityService, ProfileService],
     styleUrls: ["pages/profilemanager-common.css", "pages/profilemanager.css"]
-
 })
 export class ProfileManagerComponent implements OnInit {
 
     currentPage: ProfilePage;
-    currentProfile: PersonProfile;
     score: string;
     pageTitle: string;
     navButtonText: string;
@@ -47,24 +45,18 @@ export class ProfileManagerComponent implements OnInit {
     prevNavigaton: Array<ProfilePage> = [ProfilePage.Profile, ProfilePage.Skill,
     ProfilePage.Experience, ProfilePage.Marketability];
 
-    token:any;
+    token: any;
 
-    constructor( private marketabilityService: MarketabilityService,private profileService: ProfileService) {
-      
-       this.token= getString("accesstoken");
-       if(this.token ===null)
-       {
-           //reroute to login page
-       }
+    constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
+        private router: Router, private profileData: ProfileData, private zone: NgZone) {
         this.currentPage = ProfilePage.Profile;
-       // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
-       this.currentPage = this.forwardNavigaton[0];
+        // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
+        this.currentPage = this.forwardNavigaton[0];
         this.currentProgress = 25;
-         
     }
 
     ngOnInit() {
-       this.getProfile();
+        this.getProfile();
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
     }
@@ -75,6 +67,8 @@ export class ProfileManagerComponent implements OnInit {
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
         this.currentProgress = this.currentProgress + 25;
+        this.navigateToCurrentPage(this.currentPage);
+
         // document.getElementById('progressPercent').style.width = this.currentProgress + '%';
 
     }
@@ -90,8 +84,8 @@ export class ProfileManagerComponent implements OnInit {
         } else {
             this.currentProgress = this.currentProgress - 25;
         }
-
         this.setNavButtonText(this.currentPage);
+        this.navigateToCurrentPage(this.currentPage);
     }
 
     onMarketabilityCalculated(score: string) {
@@ -128,127 +122,86 @@ export class ProfileManagerComponent implements OnInit {
         }
     }
 
-    extractProfileData(profile:any)
-    {
-       // alert(profile.id);
+    extractProfileData(profile: any) {
+        // alert(profile.firstName);
         let userProfile = new PersonProfile();
-         userProfile.Profile = new Profile();
-            userProfile.Skills = new Array<Skill>();
-            userProfile.Experience = new Experience();
-            userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
-
-            userProfile.Profile.Name = profile.firstName+" "+profile.lastName;
-            userProfile.Profile.City = profile.location.name;
-            userProfile.Profile.Occupation = profile.headline;
-            ['C#', 'Java', 'JavaScript', 'Python','Ruby On Rails'].forEach(elm => {
-                const skill = new Skill();
-                skill.SkillName = elm;
-                userProfile.Skills.push(skill);
-            });
-
-            profile.positions.values.forEach(experience => {
-                const companyInfo = new CompanyInfo();
-                companyInfo.CompanyName = experience.company.name;
-                companyInfo.Title = experience.title;
-                companyInfo.StartDate = experience.startDate.month + ' / ' + experience.startDate.year;
-
-                if (!experience.isCurrent) {
-                    companyInfo.EndDate = experience.endDate.month + ' / ' + experience.endDate.year;
-                } else {
-                    companyInfo.EndDate = '';
-                }
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-                userProfile.Experience.WorkExperience.push(companyInfo);
-            });
-            this.currentProfile= userProfile;
-           // alert(this.currentProfile.Profile.Name);
-    }
-    handleError(error:any)
-    {
-    alert(error+"extractProfileData");
-    }
-
-    public getProfile() {
-        
-this.profileService.getProfile(this.token).subscribe(
-    data => this.extractProfileData(data),
-            error => this.handleError(error),
-            () => console.log("Node Added Complete"));
-  
-
-       /* const userProfile = new PersonProfile();
         userProfile.Profile = new Profile();
         userProfile.Skills = new Array<Skill>();
         userProfile.Experience = new Experience();
         userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
-        userProfile.Profile.Name = "Anshulee";
-        userProfile.Profile.City = "Mumbai";
-        userProfile.Profile.Occupation = "Founder, Cennest Technologies";
+
+        userProfile.Profile.Name = profile.firstName + " " + profile.lastName;
+        userProfile.Profile.City = profile.location.name;
+        userProfile.Profile.Occupation = profile.headline;
         ['C#', 'Java', 'JavaScript', 'Python', 'Ruby On Rails'].forEach(elm => {
             const skill = new Skill();
             skill.SkillName = elm;
             userProfile.Skills.push(skill);
         });
-        this.currentProfile = userProfile;
-        // Fetch profile information
-        /* const userProfile = new PersonProfile();
-         //const accessToken = localStorage.getItem('accessToken');
-         this.lock.getUserInfo(accessToken, (error, profile) => {
-             if (error) {
-                 // Handle error
-                 throw new Error(error);
-             }
- 
-             userProfile.Profile = new Profile();
-             userProfile.Skills = new Array<Skill>();
-             userProfile.Experience = new Experience();
-             userProfile.Experience.WorkExperience = new Array<CompanyInfo>();
- 
-             userProfile.Profile.Name = profile.name;
-             userProfile.Profile.City = profile.location.name;
-             userProfile.Profile.Occupation = profile.headline;
-             ['C#', 'Java', 'JavaScript', 'Python','Ruby On Rails'].forEach(elm => {
-                 const skill = new Skill();
-                 skill.SkillName = elm;
-                 userProfile.Skills.push(skill);
-             });
- 
-             profile.positions.values.forEach(experience => {
-                 const companyInfo = new CompanyInfo();
-                 companyInfo.CompanyName = experience.company.name;
-                 companyInfo.Title = experience.title;
-                 companyInfo.StartDate = experience.startDate.month + ' / ' + experience.startDate.year;
- 
-                 if (!experience.isCurrent) {
-                     companyInfo.EndDate = experience.endDate.month + ' / ' + experience.endDate.year;
-                 } else {
-                     companyInfo.EndDate = '';
-                 }
-                 userProfile.Experience.WorkExperience.push(companyInfo);
-                 userProfile.Experience.WorkExperience.push(companyInfo);
-                 userProfile.Experience.WorkExperience.push(companyInfo);
-                 userProfile.Experience.WorkExperience.push(companyInfo);
- 
-             });
-             this.currentProfile = userProfile;
-         });
- */
 
-        // dummy experience data
-        let dummyWorkExps = Array<CompanyInfo>();
+        profile.positions.values.forEach(experience => {
+            const companyInfo = new CompanyInfo();
+            companyInfo.CompanyName = experience.company.name;
+            companyInfo.Title = experience.title;
+            companyInfo.StartDate = experience.startDate.month + ' / ' + experience.startDate.year;
 
-        ["HDFC", "L&T", "OmniTech", "Cennest"].forEach(elm => {
-            let companyInfo1 = new CompanyInfo();
-            companyInfo1.CompanyName = elm;
-            companyInfo1.Title = "XYZ";
-            companyInfo1.StartDate = "01/02/2011";
-            companyInfo1.EndDate = "30/07/2013";
-            dummyWorkExps.push(companyInfo1);
+            if (!experience.isCurrent) {
+                companyInfo.EndDate = experience.endDate.month + ' / ' + experience.endDate.year;
+            } else {
+                companyInfo.EndDate = '';
+            }
+            userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
+            userProfile.Experience.WorkExperience.push(companyInfo);
         });
+        this.profileData.personProfile = userProfile;
+        let profileInfo=JSON.stringify(this.profileData.personProfile);
+        setString("personProfile",profileInfo);
+        console.log(profileInfo);
+        this.navigateToCurrentPage(this.currentPage);
+    }
+    handleError(error: any) {
+        alert(error + "extractProfileData");
+    }
 
-        this.currentProfile.Experience.WorkExperience = dummyWorkExps;
+    public getProfile() {
+        // alert("get profile called");
+        this.token = getString("accesstoken");
+        if (this.token === null) {
+            //reroute to login page
+        }
+        this.profileService.getProfile(this.token).subscribe(
+            data => this.extractProfileData(data),
+            error => this.handleError(error),
+            () => console.log("Node Added Complete"));
+    }
+
+    private navigateToCurrentPage(currentPage: ProfilePage) {
+        switch (currentPage) {
+            case ProfilePage.Profile:
+                console.log('-----------navigateToCurrentPage------------')
+                console.dir(this.profileData.personProfile);
+                this.zone.run(() => {
+                    this.router.navigate(["manager/basicprofile"]);
+                });
+                break;
+            case ProfilePage.Skill:
+                this.router.navigate(["/skills"]);
+                break;
+            case ProfilePage.Experience:
+                this.router.navigate(["/experience"]);
+                break;
+            case ProfilePage.Computation:
+                this.router.navigate(["/calculation"]);
+                break;
+            case ProfilePage.Marketability:
+                this.router.navigate(["/score", this.score]);
+                break;
+            default:
+                this.router.navigate([""]);
+                break;
+        }
     }
 
 }

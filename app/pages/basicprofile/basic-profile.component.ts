@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from "ui/page";
@@ -24,7 +25,7 @@ export class BasicProfileComponent implements OnInit {
     // @Input() profile;
     profile: Profile;
 
-    constructor(private profileData: ProfileData) {
+    constructor(private router: Router) {
         console.log('-----------BasicProfileComponent------------')
         // console.log(profileData);
         //this.profile = this.profileData.personProfile.Profile;

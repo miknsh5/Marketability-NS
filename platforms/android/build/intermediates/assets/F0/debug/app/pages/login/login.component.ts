@@ -1,7 +1,7 @@
-import { Component ,OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 
-import { Router , NavigationExtras } from "@angular/router";
-import {Page} from "ui/page";
+import { Router, NavigationExtras } from "@angular/router";
+import { Page } from "ui/page";
 import {
     getBoolean,
     setBoolean,
@@ -19,58 +19,55 @@ import * as tnsOAuthModule from 'nativescript-oauth';
 @Component({
     selector: 'mkb-login',
     templateUrl: 'pages/login/login.html',
-   styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
+    styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+
+    token: string;
 
     //constructor(private auth: AuthService, private router: Router) { }
-   constructor( private router: Router) { }
+    constructor(private router: Router, private page: Page, private zone: NgZone) {
+        this.page.actionBarHidden = true;
+    }
 
+    tryLogin() {
+        if (hasKey("accesstoken")) {
+            tnsOAuthModule.ensureValidToken()
+                .then((token: string) => {
+                    console.log('token: ' + token);
+                    this.token = tnsOAuthModule.accessToken();
 
-token:string;
-tokenRecieved:boolean=false;
-   
-   Profile()
-   {  
-       tnsOAuthModule.login()
-    .then(()=>{
-        console.log('logged in');
-        console.dir("accessToken " + tnsOAuthModule.accessToken());
-        this.token=tnsOAuthModule.accessToken();
-        setString("accesstoken",this.token);
-         this.router.navigate(["manager"]);
-         this.tokenRecieved= true;
-        //console.log(this.token);
-        //alert(tnsOAuthModule.accessToken());
-        /*let navigationExtras: NavigationExtras = {
-            queryParams: {
-                "accesstoken": this.token
-                
-            }
-        };*/
+                    setString("accesstoken", this.token);
+                    this.zone.run(() => {
+                        this.router.navigate(["home"]);
+                    });
+                })
+                .catch((er) => {
+                    //do something with the error 
+                    alert("error while validation. Logging in again" + er)
+                    tnsOAuthModule.logout();
+                    this.login();
+                });
+        }
+        else {
+            this.login();
+        }
+    }
 
-     // this.router.navigate(["manager"],navigationExtras);
-    })
-    .catch((er)=>{
-          alert(er);
-        //do something with the error 
-    });
-       if (this.tokenRecieved===false) {
-           if (hasKey("accesstoken")) {
-               this.router.navigate(["manager"]);
-           }
-       }
-
- 
-   }
-    ngOnInit() {
-        // alert("Login Page");
-       
-       
-       /* if (this.auth.isAuthenticated()) {
-            this.router.navigate(['home']);
-        } else {
-            this.auth.login();
-        }*/
+    login() {
+        tnsOAuthModule.login()
+            .then(() => {
+                console.log('logged in');
+                console.dir("accessToken " + tnsOAuthModule.accessToken());
+                this.token = tnsOAuthModule.accessToken();
+                setString("accesstoken", this.token);
+                this.zone.run(() => {
+                    this.router.navigate(["home"]);
+                });
+            })
+            .catch((er) => {
+                alert("error during login" + er);
+                //do something with the error 
+            });
     }
 }

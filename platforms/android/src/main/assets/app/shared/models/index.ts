@@ -4,3 +4,4 @@ export * from './Experience.model';
 export * from './personProfile.model';
 export * from './profile.model';
 export * from './skill.model';
+export * from './profile-data.model'

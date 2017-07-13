@@ -2270,7 +2270,11 @@ containing a value of this type.
         public static final int design_fab_background=0x7f02004b;
         public static final int design_snackbar_background=0x7f02004c;
         public static final int icon=0x7f02004d;
-        public static final int notification_template_icon_bg=0x7f02004e;
+        public static final int in_logo=0x7f02004e;
+        public static final int linkedin_buttonicon=0x7f02004f;
+        public static final int logo=0x7f020050;
+        public static final int logoblue=0x7f020051;
+        public static final int notification_template_icon_bg=0x7f020052;
     }
     public static final class id {
         public static final int action0=0x7f0b007b;

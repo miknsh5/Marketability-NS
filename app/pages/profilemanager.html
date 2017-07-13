@@ -16,6 +16,6 @@
         <mkb-calculation [CurrentPersonProfile]="currentProfile" (onscore)="onMarketabilityCalculated($event)" *ngIf="currentPage === 3" dock="top"></mkb-calculation>
         <mkb-score [score]="score" *ngIf="currentPage === 4" dock="top"></mkb-score>-->
 
-        <router-outlet name="profileManagerOutlet"></router-outlet>
+        <router-outlet></router-outlet>
     </DockLayout>
 </StackLayout>

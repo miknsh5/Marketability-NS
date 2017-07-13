@@ -1,0 +1,34 @@
+.experience_container {
+    /*margin-bottom: 20%;*/
+    padding-bottom: 30%;
+}
+
+.experience_wrapper {
+    margin-top: 5%;
+    height: 80%;
+}
+
+.experience_TextView {
+    border-style: none;
+    border-color: Transparent;
+    border-bottom: 1px solid rgb(184, 232, 218);
+    resize: none;
+    color: rgb(36, 60, 97);
+    padding: 2px 0;
+    margin: 0 0 0 0;
+    height: auto;
+    width: 100%;
+}
+
+.experience_lable {
+    color: rgb(184, 232, 218);
+    font-size: 21px;
+}
+
+.experience_companyName {
+    font-size: 25px;
+}
+
+.experience_title {
+    font-size: 20px;
+}

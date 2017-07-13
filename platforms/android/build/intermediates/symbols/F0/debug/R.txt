@@ -573,7 +573,11 @@ int drawable abc_textfield_search_material 0x7f02004a
 int drawable design_fab_background 0x7f02004b
 int drawable design_snackbar_background 0x7f02004c
 int drawable icon 0x7f02004d
-int drawable notification_template_icon_bg 0x7f02004e
+int drawable in_logo 0x7f02004e
+int drawable linkedin_buttonicon 0x7f02004f
+int drawable logo 0x7f020050
+int drawable logoblue 0x7f020051
+int drawable notification_template_icon_bg 0x7f020052
 int id action0 0x7f0b007b
 int id action_bar 0x7f0b005a
 int id action_bar_activity_content 0x7f0b0000

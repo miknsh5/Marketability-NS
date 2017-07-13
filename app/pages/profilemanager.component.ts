@@ -48,7 +48,7 @@ export class ProfileManagerComponent implements OnInit {
     token: any;
 
     constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
-        private router: Router, private profileData: ProfileData, private zone: NgZone) {
+        private router: Router, private profileData: ProfileData) {
         this.currentPage = ProfilePage.Profile;
         // this.lock = new Auth0Lock(AUTH_CONFIG.clientID, AUTH_CONFIG.domain);
         this.currentPage = this.forwardNavigaton[0];
@@ -123,7 +123,7 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     extractProfileData(profile: any) {
-        // alert(profile.firstName);
+         alert(profile.firstName);
         let userProfile = new PersonProfile();
         userProfile.Profile = new Profile();
         userProfile.Skills = new Array<Skill>();
@@ -178,25 +178,26 @@ export class ProfileManagerComponent implements OnInit {
     }
 
     private navigateToCurrentPage(currentPage: ProfilePage) {
+        alert("navigate to current page called"+currentPage);
         switch (currentPage) {
             case ProfilePage.Profile:
                 console.log('-----------navigateToCurrentPage------------')
                 console.dir(this.profileData.personProfile);
-                this.zone.run(() => {
-                    this.router.navigate(["manager/basicprofile"]);
-                });
+                //this.zone.run(() => {
+                    this.router.navigate(['home/basicprofile']);
+                //});
                 break;
             case ProfilePage.Skill:
-                this.router.navigate(["/skills"]);
+                this.router.navigate(["home/skills"]);
                 break;
             case ProfilePage.Experience:
-                this.router.navigate(["/experience"]);
+                this.router.navigate(["home/experience"]);
                 break;
             case ProfilePage.Computation:
-                this.router.navigate(["/calculation"]);
+                this.router.navigate(["home/calculation"]);
                 break;
             case ProfilePage.Marketability:
-                this.router.navigate(["/score", this.score]);
+                this.router.navigate(["home/score", this.score]);
                 break;
             default:
                 this.router.navigate([""]);

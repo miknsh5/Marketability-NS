@@ -1,15 +1,15 @@
 [
     {
-        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\notification_template_media.xml",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_template_media.xml"
     },
     {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\select_dialog_item_material.xml",
@@ -48,20 +48,20 @@
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_menu_item.xml"
     },
     {
-        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\exception_tab.xml",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\src\\debug\\res\\layout\\exception_tab.xml"
     },
     {
-        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_title_item.xml"
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.4.0\\res\\layout\\design_navigation_item_separator.xml"
     },
     {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_list_menu_item_radio.xml",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_screen_content_include.xml",
@@ -200,11 +200,11 @@
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\notification_media_cancel_action.xml",
-        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
         "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\abc_screen_simple.xml",
         "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\res\\merged\\F0\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "D:\\Cennest\\Marketability-NativeScript\\Marketability-NS\\platforms\\android\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\layout\\notification_media_cancel_action.xml"
     }
 ]

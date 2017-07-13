@@ -6,7 +6,7 @@ D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\mai
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\basicprofile\basic-profile.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\calculation\calculation.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\experience\experience.component.js
-D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\list\list.component.js
+D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\loading\loading.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\login\login.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\score\score.component.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\pages\skills\skills.component.js
@@ -14,13 +14,12 @@ D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\mai
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\index.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\enums\index.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\enums\profile-page.enum.js
-D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\grocery\grocery-list.service.js
-D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\grocery\grocery.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\authentication.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\companyInfo.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\Experience.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\index.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\personProfile.model.js
+D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\profile-data.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\profile.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\models\skill.model.js
 D:\Cennest\Marketability-NativeScript\Marketability-NS\platforms\android\src\main\assets\app\shared\services\index.js
