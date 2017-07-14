@@ -44,7 +44,7 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
     token: any;
 
     constructor(private marketabilityService: MarketabilityService, private profileService: ProfileService,
-        private router: Router, private routerExtensions: RouterExtensions) {
+        private router: RouterExtensions) {
         this.currentPage = ProfilePage.Profile;
         this.currentPage = this.forwardNavigaton[0];
         this.currentProgress = 25;
@@ -56,24 +56,28 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
         this.setNavButtonText(this.currentPage);
 
         if (isAndroid) {
-            application.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-                if (this.currentPage !== ProfilePage.Profile) {
-                    data.cancel = true;
-                    this.onPrevButtonClicked(this.currentPage);
-                }
-            });
+            application.android.on(AndroidApplication.activityBackPressedEvent, this.backPressEvent);
         }
     }
 
+    backPressEvent(data: AndroidActivityBackPressedEventData) {
+        console.log("---back pressed start");
+        if (this.currentPage !== ProfilePage.Profile) {
+            data.cancel = true;
+            
+            this.onPrevButtonClicked(this.currentPage);
+        }
+        console.log("---back pressed end");
+    }
+
+
     ngOnDestroy() {
         console.log("------destroy-----------");
+
+
         if (isAndroid) {
-            application.android.off(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
-                if (this.currentPage !== ProfilePage.Profile) {
-                    data.cancel = true;
-                    this.onPrevButtonClicked(this.currentPage);
-                }
-            });
+            console.log("---destroy called");
+            application.android.off(AndroidApplication.activityBackPressedEvent, this.backPressEvent);
         }
     }
 
@@ -96,9 +100,9 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
         this.setPageTitle(this.currentPage);
         this.setNavButtonText(this.currentPage);
         if (page === ProfilePage.Marketability) {
-            this.routerExtensions.back();
+            this.router.back();
         }
-        this.routerExtensions.back();
+        this.router.back();
     }
 
     calculateMarketability() {
@@ -113,7 +117,7 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
         tnsOAuthModule.logout();
         remove("accesstoken");
         remove("personProfile");
-        this.router.navigate(['']);
+        this.router.navigate([''], { clearHistory: true });
     }
 
     setPageTitle(page: ProfilePage) {

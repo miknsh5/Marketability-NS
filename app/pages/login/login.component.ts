@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
 import { hasKey, getString, setString, clear } from "application-settings";
 import * as tnsOAuthModule from 'nativescript-oauth';
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: 'mkb-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
 
     token: string;
 
-    constructor(private router: Router, private page: Page, private zone: NgZone) {
+    constructor(private router: RouterExtensions, private page: Page, private zone: NgZone) {
         this.page.actionBarHidden = true;
     }
 
@@ -24,7 +25,7 @@ export class LoginComponent {
                     this.token = tnsOAuthModule.accessToken();
                     setString("accesstoken", this.token);
                     this.zone.run(() => {
-                        this.router.navigate(["home"]);
+                        this.router.navigate(["home"], {clearHistory:true});
                     });
                 })
                 .catch((er) => {
@@ -45,7 +46,8 @@ export class LoginComponent {
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
                 this.zone.run(() => {
-                    this.router.navigate(["home"]);
+                    this.router.navigate(["home"],{clearHistory:true});
+                    
                 });
             })
             .catch((er) => {
