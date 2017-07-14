@@ -19,20 +19,7 @@ export class LoginComponent {
 
     tryLogin() {
         if (hasKey("accesstoken")) {
-            tnsOAuthModule.ensureValidToken()
-                .then((token: string) => {
-                    this.token = tnsOAuthModule.accessToken();
-                    setString("accesstoken", this.token);
-                    this.zone.run(() => {
-                        this.router.navigate(["home"]);
-                    });
-                })
-                .catch((er) => {
-                    //do something with the error 
-                    alert("error while validation. Logging in again")
-                    tnsOAuthModule.logout();
-                    this.login();
-                });
+            this.router.navigate(["home"]);
         }
         else {
             this.login();
@@ -44,9 +31,9 @@ export class LoginComponent {
             .then(() => {
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
-                this.zone.run(() => {
+               
                     this.router.navigate(["home"]);
-                });
+                
             })
             .catch((er) => {
                 alert("error during login" + er);
