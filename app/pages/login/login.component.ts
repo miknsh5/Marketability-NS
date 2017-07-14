@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from "@angular/core";
-import { Router, NavigationExtras } from "@angular/router";
+import { NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
 import { hasKey, getString, setString, clear } from "application-settings";
 import * as tnsOAuthModule from 'nativescript-oauth';
@@ -20,7 +20,7 @@ export class LoginComponent {
 
     tryLogin() {
         if (hasKey("accesstoken")) {
-            this.router.navigate(["home"]);
+            this.router.navigate(["home"], { clearHistory: true });
         }
         else {
             this.login();
@@ -32,11 +32,10 @@ export class LoginComponent {
             .then(() => {
                 this.token = tnsOAuthModule.accessToken();
                 setString("accesstoken", this.token);
-                this.router.navigate(["home"]);
+                this.router.navigate(["home"], { clearHistory: true });
             })
             .catch((er) => {
                 alert("error during login" + er);
-                //do something with the error 
             });
     }
 }

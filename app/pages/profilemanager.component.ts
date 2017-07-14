@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone, OnDestroy } from "@angular/core";
 import * as dockModule from "tns-core-modules/ui/layouts/dock-layout";
-import { Router, NavigationExtras } from "@angular/router";
+import { NavigationExtras } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { hasKey, getString, setString, remove } from "application-settings";
 import "rxjs/Rx";
@@ -61,22 +61,16 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
     }
 
     backPressEvent(data: AndroidActivityBackPressedEventData) {
-        console.log("---back pressed start");
         if (this.currentPage !== ProfilePage.Profile) {
             data.cancel = true;
-            
+
             this.onPrevButtonClicked(this.currentPage);
         }
-        console.log("---back pressed end");
     }
 
 
     ngOnDestroy() {
-        console.log("------destroy-----------");
-
-
         if (isAndroid) {
-            console.log("---destroy called");
             application.android.off(AndroidApplication.activityBackPressedEvent, this.backPressEvent);
         }
     }
