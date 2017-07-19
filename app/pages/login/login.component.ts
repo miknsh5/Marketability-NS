@@ -21,8 +21,7 @@ export class LoginComponent {
     tryLogin() {
         if (hasKey("accesstoken")) {
             this.router.navigate(["home"], { clearHistory: true });
-        }
-        else {
+        } else {
             this.login();
         }
     }

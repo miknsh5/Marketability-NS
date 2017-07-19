@@ -56,22 +56,23 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
         this.setNavButtonText(this.currentPage);
 
         if (isAndroid) {
-            application.android.on(AndroidApplication.activityBackPressedEvent, this.backPressEvent);
+            application.android.on(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                if (this.currentPage !== ProfilePage.Profile) {
+                    data.cancel = true;
+                    this.onPrevButtonClicked(this.currentPage);
+                }
+            });
         }
     }
-
-    backPressEvent(data: AndroidActivityBackPressedEventData) {
-        if (this.currentPage !== ProfilePage.Profile) {
-            data.cancel = true;
-
-            this.onPrevButtonClicked(this.currentPage);
-        }
-    }
-
 
     ngOnDestroy() {
         if (isAndroid) {
-            application.android.off(AndroidApplication.activityBackPressedEvent, this.backPressEvent);
+            application.android.off(AndroidApplication.activityBackPressedEvent, (data: AndroidActivityBackPressedEventData) => {
+                if (this.currentPage !== ProfilePage.Profile) {
+                    data.cancel = true;
+                    this.onPrevButtonClicked(this.currentPage);
+                }
+            });
         }
     }
 
