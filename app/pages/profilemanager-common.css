@@ -1,6 +1,7 @@
 .appNavBar {
     background-color: rgb(34, 60, 97);
     color: rgb(255, 255, 255);
+    width: 100%;
 }
 
 .profile-container {
@@ -28,4 +29,8 @@
 
 .page-title {
     font-size: 25px;
+}
+
+.navBarContents{
+    width: 100%;
 }

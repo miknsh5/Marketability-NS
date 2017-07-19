@@ -2,7 +2,7 @@
 </script>
 <ActionBar title="" class="appNavBar roboto-regular">
     <NavigationButton visibility="collapse" text="Go Back" android.systemIcon="ic_menu_back" verticalAlignment="center"></NavigationButton>
-    <GridLayout columns="auto,*,60">
+    <GridLayout columns="auto,*,60" class="navBarContents">
         <Image col="0" class="logoutImg" src="res://ic_chevron_left" (tap)="onPrevButtonClicked(currentPage)" stretch="none" verticalAlignment="center" *ngIf="currentPage > 0 && currentPage !=3"></Image>
         <Label col="1" [text]="pageTitle" class="page-title" verticalAlignment="center"></Label>
         <Image col="2" class="logoutImg" src="res://ic_exit" (tap)="onLogoutButtonClicked()" stretch="none" verticalAlignment="center" *ngIf="currentPage !== 3 "></Image>

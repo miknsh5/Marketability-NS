@@ -167,9 +167,6 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
                 companyInfo.EndDate = '';
             }
             userProfile.Experience.WorkExperience.push(companyInfo);
-            userProfile.Experience.WorkExperience.push(companyInfo);
-            userProfile.Experience.WorkExperience.push(companyInfo);
-            userProfile.Experience.WorkExperience.push(companyInfo);
         });
         this.personProfile = userProfile;
         setString("personProfile", JSON.stringify(this.personProfile));
