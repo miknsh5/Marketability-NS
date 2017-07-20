@@ -15,7 +15,7 @@ export class LoginComponent {
     token: string;
 
     constructor(private router: RouterExtensions, private page: Page, private zone: NgZone) {
-        this.page.actionBarHidden = true;
+        // this.page.actionBarHidden = true;
     }
 
     tryLogin() {
