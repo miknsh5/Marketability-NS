@@ -2,8 +2,11 @@ import { Component, OnInit, NgZone } from "@angular/core";
 import { NavigationExtras } from "@angular/router";
 import { Page } from "ui/page";
 import { hasKey, getString, setString, clear } from "application-settings";
-import * as tnsOAuthModule from 'nativescript-oauth';
+// import * as tnsOAuthModule from 'nativescript-oauth';
 import { RouterExtensions } from "nativescript-angular/router";
+import { Auth0Lock } from "nativescript-auth0";
+
+declare let auth0Lock;
 
 @Component({
     selector: 'mkb-login',
@@ -15,7 +18,15 @@ export class LoginComponent {
     token: string;
 
     constructor(private router: RouterExtensions, private page: Page, private zone: NgZone) {
-        this.page.actionBarHidden = true;
+        // this.page.actionBarHidden = true;
+        console.log("LoginComponent");
+        if (!auth0Lock) {
+            auth0Lock = new Auth0Lock({
+                clientId: 'aadjxol4OAEJ1Mp02zh7PfQ9M91xdeoA',
+                domain: 'marketability-ns.auth0.com',
+                scope: ["offline_access openid profile email"]
+            });
+        }
     }
 
     tryLogin() {
@@ -27,14 +38,10 @@ export class LoginComponent {
     }
 
     login() {
-        tnsOAuthModule.login()
-            .then(() => {
-                this.token = tnsOAuthModule.accessToken();
-                setString("accesstoken", this.token);
-                this.router.navigate(["home"], { clearHistory: true });
-            })
-            .catch((er) => {
-                alert("error during login" + er);
-            });
+        auth0Lock.show().then((res) => {
+            alert(res);
+        }, (error) => {
+            alert(error);
+        });
     }
 }

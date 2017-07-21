@@ -36,5 +36,31 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="com.tns.ErrorReportActivity"/>
+
+		<!--Auth0 Lock-->
+      	<activity
+          android:name="com.auth0.android.lock.LockActivity"
+          android:label="Classic Lock"
+          android:launchMode="singleTask"
+          android:screenOrientation="portrait"
+          android:theme="@style/Lock.Theme">
+          <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+ 
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+ 
+              <data android:host="marketability-ns.auth0.com"
+                  android:pathPrefix="/android/__PACKAGE__/callback"
+                  android:scheme="https" />
+          </intent-filter>
+      	</activity>
+      	<!--Auth0 Lock End-->
+ 
+	  	<!--Auth0 Lock Embedded WebView-->
+      	<activity android:name="com.auth0.android.provider.WebAuthActivity" />
+      	<!--Auth0 Lock Embedded WebView End-->
+
 	</application>
+	
 </manifest>

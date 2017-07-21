@@ -4,7 +4,7 @@ import { NavigationExtras } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { hasKey, getString, setString, remove } from "application-settings";
 import "rxjs/Rx";
-import * as tnsOAuthModule from 'nativescript-oauth';
+// import * as tnsOAuthModule from 'nativescript-oauth';
 import * as application from "application";
 import { AndroidApplication, AndroidActivityBackPressedEventData } from "application";
 import { isAndroid } from "platform";
@@ -109,7 +109,7 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
     }
 
     onLogoutButtonClicked() {
-        tnsOAuthModule.logout();
+        //tnsOAuthModule.logout();
         remove("accesstoken");
         remove("personProfile");
         this.router.navigate([''], { clearHistory: true });
@@ -179,12 +179,13 @@ export class ProfileManagerComponent implements OnInit, OnDestroy {
     }
 
     public getProfile() {
-        this.token = getString("accesstoken");
+        const profile = getString("profile");
+        this.extractProfileData(profile);
 
-        this.profileService.getProfile(this.token).subscribe(
-            data => this.extractProfileData(data),
-            error => this.handleError(error),
-            () => console.log("Node Added Complete"));
+        // this.profileService.getProfile(this.token).subscribe(
+        //     data => this.extractProfileData(data),
+        //     error => this.handleError(error),
+        //     () => console.log("Node Added Complete"));
     }
 
     private navigateToCurrentPage(currentPage: ProfilePage) {

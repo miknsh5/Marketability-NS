@@ -9,6 +9,7 @@ android {
   defaultConfig {  
     generatedDensities = []
     applicationId = "org.nativescript.MarketabilityNS" 
+    manifestPlaceholders = [auth0Domain: "marketability-ns.auth0.com", auth0Scheme: "https"]
     
     //override supported platforms
     // ndk {
